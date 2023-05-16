@@ -1,16 +1,21 @@
-package com.example.model;
+package com.example.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class CuaHang {
-    private int id;
+
+    private UUID id;
 
     private String ma;
 

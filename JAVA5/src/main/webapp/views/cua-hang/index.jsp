@@ -3,7 +3,7 @@
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <html>
 <head>
-    <title>Đăng Nhập</title>
+    <title>Index</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
 
 </head>
@@ -49,9 +49,6 @@
         </tbody>
     </table>
 </c:if>
-
-
-<script src=".../js/bootstrap.min.js"></script>
 
 </body>
 </html>

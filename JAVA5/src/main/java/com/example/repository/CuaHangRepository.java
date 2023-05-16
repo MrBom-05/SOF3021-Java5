@@ -1,6 +1,6 @@
 package com.example.repository;
 
-import com.example.model.CuaHang;
+import com.example.entities.CuaHang;
 
 import java.util.ArrayList;
 

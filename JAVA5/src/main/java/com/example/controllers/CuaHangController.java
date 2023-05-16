@@ -1,19 +1,18 @@
 package com.example.controllers;
 
-import com.example.model.CuaHang;
+import com.example.entities.CuaHang;
 import com.example.repository.CuaHangRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("cua-hang")
 public class CuaHangController {
-
     private CuaHangRepository cuaHangRepository = new CuaHangRepository();
-    
+
+
+    private static final String redirect = "redirect:/cua-hang/index";
 
     @GetMapping("index")
     public String index(Model model){
@@ -34,21 +33,21 @@ public class CuaHangController {
     }
 
     @GetMapping("delete/{ma}")
-    public String delete(CuaHang cuaHang){
-        cuaHangRepository.delete(cuaHang);
-        return "redirect:/cua-hang/index";
+    public String delete(@PathVariable("ma") String ma){
+        cuaHangRepository.delete(cuaHangRepository.findByMa(ma));
+        return redirect;
     }
 
     @PostMapping("store")
     public String store(CuaHang cuaHang){
         cuaHangRepository.insert(cuaHang);
-        return "redirect:/cua-hang/index";
+        return redirect;
     }
 
     @PostMapping("update/{ma}")
     public String update(CuaHang cuaHang){
         cuaHangRepository.update(cuaHang);
-        return "redirect:/cua-hang/index";
+        return redirect;
     }
 
 

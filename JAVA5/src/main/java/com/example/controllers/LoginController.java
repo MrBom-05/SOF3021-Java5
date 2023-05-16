@@ -14,9 +14,9 @@ public class LoginController {
 
     @PostMapping("login")
     public String login(Account account){
-        System.out.println(account.getEmail());
-        System.out.println(account.getPassword());
-        System.out.println(account.isRemenber());
+        if (account.getEmail().equals("herogamings969@gmail.com") || account.getPassword().equals("123@123a")){
+            return "redirect:/cua-hang/index";
+        }
         return "login";
     }
 }
