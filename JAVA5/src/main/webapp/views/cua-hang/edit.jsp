@@ -3,60 +3,62 @@
 <head>
     <title>Create</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <%@taglib prefix="springForm" uri="http://www.springframework.org/tags/form"%>
 </head>
 <body>
 <h2 class="mt-3 text-center">Cập Nhật Cửa Hàng</h2>
 
-<form class="col-6 offset-3 mt-5 border p-4" novalidate method="POST"
-      action="/cua-hang/update/${cuaHang.ma}" id="form">
+<%--@elvariable id="cuaHang" type="java"--%>
+<springForm:form class="col-6 offset-3 mt-5 border p-4" method="POST"
+                 action="/cua-hang/update?ma=${cuaHang.ma}" id="form" modelAttribute="cuaHang">
 
     <div class="row">
         <div class="col-4">
             <div class="input-group mb-3">
                 <span class="input-group-text">Mã<span class="text-danger">*</span></span>
-                <input type="text" class="form-control" name="ma" value="${cuaHang.ma}" required disabled
-                       onblur="validateRed(this)">
+                <springForm:input type="text" class="form-control" path="ma" disabled="true"/>
+                <springForm:errors path="ma" cssClass="text-danger"/>
             </div>
         </div>
 
         <div class="col-8">
             <div class="input-group mb-3 col-6">
                 <span class="input-group-text">Tên<span class="text-danger">*</span></span>
-                <input type="text" class="form-control" name="ten" value="${cuaHang.ten}" required
-                       onblur="validateRed(this)">
+                <springForm:input type="text" class="form-control" path="ten"/>
+                <springForm:errors path="ten" cssClass="text-danger"/>
             </div>
         </div>
     </div>
 
     <div class="input-group mb-3">
         <span class="input-group-text">Địa chỉ<span class="text-danger">*</span></span>
-        <textarea class="form-control" aria-label="With textarea" name="diaChi">${cuaHang.diaChi}</textarea>
+        <springForm:textarea class="form-control" aria-label="With textarea" path="diaChi"></springForm:textarea>
+        <springForm:errors path="diaChi" cssClass="text-danger"/>
     </div>
 
     <div class="row">
         <div class="col-8">
             <div class="input-group mb-3">
                 <span class="input-group-text">Thành Phố<span class="text-danger">*</span></span>
-                <input type="text" class="form-control" name="thanhPho" value="${cuaHang.thanhPho}" required
-                       onblur="validateRed(this)">
+                <springForm:input type="text" class="form-control" path="thanhPho"/>
+                <springForm:errors path="thanhPho" cssClass="text-danger"/>
             </div>
         </div>
 
         <div class="col-4">
             <div class="input-group mb-3 col-6">
                 <span class="input-group-text">Quốc Gia<span class="text-danger">*</span></span>
-                <input type="text" class="form-control" name="quocGia" value="${cuaHang.quocGia}" required
-                       onblur="validateRed(this)">
+                <springForm:input type="text" class="form-control" path="quocGia"/>
+                <springForm:errors path="quocGia" cssClass="text-danger"/>
             </div>
         </div>
     </div>
+
     <div class="col-12 mt-5">
-        <button class="btn btn-primary col-2 offset-5" type="submit" onclick="return validateForm(event, 'form')">
-            Update
-        </button>
+        <button class="btn btn-primary col-2 offset-5" type="submit">Update</button>
     </div>
 
-</form>
+</springForm:form>
 
 
 </body>

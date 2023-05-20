@@ -40,8 +40,8 @@
                 <td>${ cuaHang.quocGia }</td>
 
                 <td class="text-center">
-                    <a href="/cua-hang/edit/${ cuaHang.ma }" class="btn btn-primary">Update</a>
-                    <a href="/cua-hang/delete/${ cuaHang.ma }" class="btn btn-danger"
+                    <a href="/cua-hang/update?ma=${ cuaHang.ma }" class="btn btn-primary">Update</a>
+                    <a href="/cua-hang/delete?ma=${ cuaHang.ma }" class="btn btn-danger"
                        onclick="return confirm('Bạn có muốn xóa không ?')">Delete</a>
                 </td>
             </tr>

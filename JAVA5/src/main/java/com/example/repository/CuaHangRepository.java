@@ -1,14 +1,15 @@
 package com.example.repository;
 
+
 import com.example.entities.CuaHang;
 
 import java.util.ArrayList;
 
 public class CuaHangRepository {
+
     private ArrayList<CuaHang> list = new ArrayList<>();
 
     public void insert(CuaHang cuaHang) {
-
         this.list.add(cuaHang);
     }
 
@@ -42,10 +43,9 @@ public class CuaHangRepository {
         for (int i = 0; i < this.list.size(); i++) {
             CuaHang vm = this.list.get(i);
             if (vm.getMa().equals(ma)) {
-                return this.list.get(i);
+                return list.get(i);
             }
         }
-
         return null;
     }
 }
