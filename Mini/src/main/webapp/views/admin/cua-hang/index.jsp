@@ -1,13 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
-<html>
-<head>
-    <title>Index</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-
-</head>
-<body class="col-10 offset-1">
 
 <h2 class="mt-3">Quản Lý Cửa Hàng</h2>
 
@@ -50,6 +43,4 @@
     </table>
 </c:if>
 
-</body>
-</html>
 

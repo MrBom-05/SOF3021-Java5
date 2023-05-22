@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.entities.CuaHang;
 import com.example.services.CuaHangService;
 import com.example.services.implement.CuaHangServiceImplement;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,25 +20,31 @@ public class CuaHangController {
     @Autowired
     private CuaHangService cuaHangService = new CuaHangServiceImplement();
 
+    @Autowired
+    private HttpServletRequest request;
+
     private static final String redirect = "redirect:/cua-hang/index";
 //    private static final String forward = "forward:/cua-hang/index";
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", cuaHangService.findAll());
-        return "admin/cua-hang/index";
+        request.setAttribute("view", "/views/admin/cua-hang/index.jsp");
+        return "admin/layout";
     }
 
     @GetMapping("create")
     public String create(Model model) {
         model.addAttribute("cuaHang", new CuaHang(null, "PH", "", "", "", "Việt Nam"));
-        return "admin/cua-hang/create";
+        request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
+        return "admin/layout";
     }
 
     @GetMapping("update")
     public String edit(Model model, @RequestParam("id") UUID id) {
         model.addAttribute("cuaHang", cuaHangService.findById(id));
-        return "admin/cua-hang/edit";
+        request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
+        return "admin/layout";
     }
 
     @GetMapping("delete")
@@ -49,7 +56,8 @@ public class CuaHangController {
     @PostMapping("create")
     public String store(@Valid @ModelAttribute("cuaHang") CuaHang cuaHang, BindingResult result) {
         if (result.hasErrors()) {
-            return "admin/cua-hang/create";
+            request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
+            return "admin/layout";
         } else {
             cuaHangService.saveOrUpdate(cuaHang);
             return redirect;
@@ -59,7 +67,8 @@ public class CuaHangController {
     @PostMapping("update")
     public String update( @Valid @ModelAttribute("cuaHang") CuaHang cuaHang, BindingResult result) {
         if (result.hasErrors()) {
-            return "admin/cua-hang/edit";
+            request.setAttribute("view", "/views/admin/cua-hang/edit.jsp");
+            return "admin/layout";
         } else {
             cuaHangService.saveOrUpdate(cuaHang);
             return redirect;

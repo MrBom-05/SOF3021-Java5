@@ -1,11 +1,6 @@
-<%@ page contentType="text/html; charset=UTF8" language="java" %>
-<html>
-<head>
-    <title>Create</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
-    <%@taglib prefix="springForm" uri="http://www.springframework.org/tags/form"%>
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="springForm" uri="http://www.springframework.org/tags/form" %>
+
 <h2 class="mt-3 text-center">Cập Nhật Cửa Hàng</h2>
 
 <%--@elvariable id="cuaHang" type="java"--%>
@@ -60,8 +55,5 @@
 
 </springForm:form>
 
-
-</body>
-</html>
 
 

@@ -100,7 +100,7 @@
     <div class="col-md-4 offset-4">
         <label class="form-label">Trạng Thái<span class="text-danger">*</span></label>
         <springForm:select class="form-select" name="trangThai" path="trangThai">
-            <springForm:option value="false" disabled="true" selected="true">-- Chọn Trạng Thái --</springForm:option>
+            <springForm:option value="0" disabled="true" selected="true">-- Chọn Trạng Thái --</springForm:option>
             <springForm:option value="1">Đang Làm</springForm:option>
             <springForm:option value="0">Đã Nghỉ</springForm:option>
         </springForm:select>
