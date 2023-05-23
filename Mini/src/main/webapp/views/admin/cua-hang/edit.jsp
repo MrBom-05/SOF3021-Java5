@@ -4,8 +4,8 @@
 <h2 class="mt-3 text-center">Cập Nhật Cửa Hàng</h2>
 
 <%--@elvariable id="cuaHang" type="java"--%>
-<springForm:form class="col-6 offset-3 mt-5 border p-4" method="POST"
-                 action="/cua-hang/update?id=${cuaHang.id}" id="form" modelAttribute="cuaHang">
+<springForm:form class="col-8 offset-2 mt-5 border p-4" method="POST"
+                 action="/cua-hang/update?id=${cuaHang.id}" modelAttribute="cuaHang">
 
     <div class="row">
         <div class="col-4">

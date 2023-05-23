@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 @Entity
 @Table(name = "nhan_vien")
 public class NhanVien {

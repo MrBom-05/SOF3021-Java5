@@ -2,6 +2,8 @@ package com.example.entities;
 
 import lombok.*;
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +12,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 @Entity
 @Table(name = "chuc_vu")
 public class ChucVu {

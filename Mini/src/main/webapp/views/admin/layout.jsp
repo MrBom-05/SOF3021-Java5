@@ -15,10 +15,10 @@
 <div class="col-2 bg-dark">
     <ul class="list-group mt-5 ms-2">
         <a class="list-group-item" href="/cua-hang/index">Cửa Hàng</a>
-        <a class="list-group-item">Nhân Viên</a>
-        <a class="list-group-item">Khách Hàng</a>
-        <a class="list-group-item">Chức Vụ</a>
-        <a class="list-group-item">Sản Phẩm</a>
+        <a class="list-group-item" href="/nhan-vien/index">Nhân Viên</a>
+        <a class="list-group-item" href="/khach-hang/index">Khách Hàng</a>
+        <a class="list-group-item" href="/chuc-vu/index">Chức Vụ</a>
+        <a class="list-group-item" href="/san-pham/index">Sản Phẩm</a>
     </ul>
 </div>
 <div class="col-10">

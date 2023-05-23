@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public interface CuaHangService {
     public List<CuaHang> findAll();
-    public void saveOrUpdate(CuaHang cuaHang);
+    public void save(CuaHang cuaHang);
+    public void update(CuaHang cuaHang, UUID id);
     public void deleteById(UUID id);
     public CuaHang findById(UUID id);
 }

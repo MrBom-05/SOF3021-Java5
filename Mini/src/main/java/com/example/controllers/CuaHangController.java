@@ -23,6 +23,9 @@ public class CuaHangController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private CuaHang cuaHang;
+
     private static final String redirect = "redirect:/cua-hang/index";
 //    private static final String forward = "forward:/cua-hang/index";
 
@@ -35,7 +38,7 @@ public class CuaHangController {
 
     @GetMapping("create")
     public String create(Model model) {
-        model.addAttribute("cuaHang", new CuaHang(null, "PH", "", "", "", "Việt Nam"));
+        model.addAttribute("cuaHang", cuaHang);
         request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
         return "admin/layout";
     }
@@ -43,7 +46,7 @@ public class CuaHangController {
     @GetMapping("update")
     public String edit(Model model, @RequestParam("id") UUID id) {
         model.addAttribute("cuaHang", cuaHangService.findById(id));
-        request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
+        request.setAttribute("view", "/views/admin/cua-hang/edit.jsp");
         return "admin/layout";
     }
 
@@ -59,18 +62,18 @@ public class CuaHangController {
             request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {
-            cuaHangService.saveOrUpdate(cuaHang);
+            cuaHangService.save(cuaHang);
             return redirect;
         }
     }
 
     @PostMapping("update")
-    public String update( @Valid @ModelAttribute("cuaHang") CuaHang cuaHang, BindingResult result) {
+    public String update(@RequestParam("id") UUID id, @Valid @ModelAttribute("cuaHang") CuaHang cuaHang, BindingResult result) {
         if (result.hasErrors()) {
             request.setAttribute("view", "/views/admin/cua-hang/edit.jsp");
             return "admin/layout";
         } else {
-            cuaHangService.saveOrUpdate(cuaHang);
+            cuaHangService.update(cuaHang, id);
             return redirect;
         }
     }

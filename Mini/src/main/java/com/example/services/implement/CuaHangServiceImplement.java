@@ -16,6 +16,8 @@ public class CuaHangServiceImplement implements CuaHangService {
     @Autowired
     private CuaHangRepository cuaHangRepository;
 
+    private SerialNumberGenerator serialNumberGenerator = new SerialNumberGenerator();
+
     @Override
     public List<CuaHang> findAll() {
         try {
@@ -27,8 +29,24 @@ public class CuaHangServiceImplement implements CuaHangService {
     }
 
     @Override
-    public void saveOrUpdate(CuaHang cuaHang) {
+    public void save(CuaHang cuaHang) {
+        cuaHang.setMa(serialNumberGenerator.generateSerialNumber());
         cuaHangRepository.save(cuaHang);
+    }
+
+    @Override
+    public void update(CuaHang cuaHang, UUID id) {
+        Optional<CuaHang> cuaHangOptional = cuaHangRepository.findById(id);
+        if (cuaHangOptional.isPresent()){
+            CuaHang cuaHangFindById = cuaHangOptional.get();
+
+            cuaHangFindById.setTen(cuaHang.getTen());
+            cuaHangFindById.setDiaChi(cuaHang.getDiaChi());
+            cuaHangFindById.setThanhPho(cuaHang.getThanhPho());
+            cuaHangFindById.setQuocGia(cuaHang.getQuocGia());
+
+            cuaHangRepository.save(cuaHangFindById);
+        }
     }
 
     @Override
