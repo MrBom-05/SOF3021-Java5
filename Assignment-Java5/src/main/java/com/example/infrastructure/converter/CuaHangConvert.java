@@ -6,6 +6,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class CuaHangConvert {
     @Autowired
@@ -17,5 +20,11 @@ public class CuaHangConvert {
 
     public CuaHangViewModel mapToViewModel(CuaHang domain) {
         return modelMapper.map(domain, CuaHangViewModel.class);
+    }
+
+    public List<CuaHangViewModel> mapEntityListToViewModelList(List<CuaHang> entityList) {
+        return entityList.stream()
+                .map(entity -> modelMapper.map(entity, CuaHangViewModel.class))
+                .collect(Collectors.toList());
     }
 }

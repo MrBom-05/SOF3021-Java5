@@ -12,7 +12,7 @@
 
 <h2 class="mt-3">Quản Lý Cửa Hàng</h2>
 
-<a href="/Assignment_war_exploded/admin/cua-hang/create" class="btn btn-success mt-3">Add</a>
+<a href="/admin/cua-hang/create" class="btn btn-success mt-3">Add</a>
 <c:if test="${ f:length(list) == 0 }">
     <h4 class="text-center">Không có dữ liệu</h4>
 </c:if>

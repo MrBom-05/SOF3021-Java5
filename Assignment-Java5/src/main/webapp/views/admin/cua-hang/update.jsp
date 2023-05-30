@@ -11,7 +11,7 @@
 <h2 class="mt-3 text-center">Cập Nhật Cửa Hàng</h2>
 
 <%--@elvariable id="cuaHang" type="java"--%>
-<form:form class="col-6 offset-3 mt-5 border p-4" method="POST"
+<form:form class="col-8 offset-2 mt-5 border p-4" method="POST"
            action="/admin/cua-hang/update/${cuaHang.id}" modelAttribute="cuaHang">
 
     <div class="row">
