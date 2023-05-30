@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.entities.CuaHang;
 import com.example.repository.CuaHangRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,8 @@ import java.util.UUID;
 @RequestMapping("cua-hang")
 public class CuaHangController {
 
-    private CuaHangRepository cuaHangRepository = new CuaHangRepository();
+    @Autowired
+    private CuaHangRepository cuaHangRepository;
 
     private static final String redirect = "redirect:/cua-hang/index";
 //    private static final String forward = "forward:/cua-hang/index";
@@ -32,14 +34,14 @@ public class CuaHangController {
     }
 
     @GetMapping("update")
-    public String edit(Model model, @RequestParam("ma") String ma) {
-        model.addAttribute("cuaHang", cuaHangRepository.findByMa(ma));
+    public String edit(Model model, @RequestParam("id") UUID id) {
+        model.addAttribute("cuaHang", cuaHangRepository.getOne(id));
         return "cua-hang/edit";
     }
 
     @GetMapping("delete")
-    public String delete(@RequestParam("ma") String ma) {
-        cuaHangRepository.delete(cuaHangRepository.findByMa(ma));
+    public String delete(@RequestParam("id") UUID id) {
+        cuaHangRepository.delete(cuaHangRepository.getOne(id));
         return redirect;
     }
 
@@ -48,7 +50,7 @@ public class CuaHangController {
         if (result.hasErrors()) {
             return "cua-hang/create";
         } else {
-            cuaHangRepository.insert(cuaHang);
+            cuaHangRepository.save(cuaHang);
             return redirect;
         }
     }
@@ -58,7 +60,7 @@ public class CuaHangController {
         if (result.hasErrors()) {
             return "cua-hang/edit";
         } else {
-            cuaHangRepository.update(cuaHang);
+            cuaHangRepository.save(cuaHang);
             return redirect;
         }
     }

@@ -48,8 +48,8 @@
             <td>${khachHang.sdt}</td>
             <td>${khachHang.email}</td>
             <td>
-                <a type="button" href="/khach-hang/update?ma=${khachHang.ma}">Update</a>
-                <a type="button" href="/khach-hang/delete?ma=${khachHang.ma}">Delete</a>
+                <a type="button" href="/khach-hang/update?id=${khachHang.ma}">Update</a>
+                <a type="button" href="/khach-hang/delete?id=${khachHang.ma}">Delete</a>
             </td>
         </tr>
     </c:forEach>
