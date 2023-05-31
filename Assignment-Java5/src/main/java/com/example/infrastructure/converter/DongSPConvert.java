@@ -14,7 +14,7 @@ public class DongSPConvert {
     @Autowired
     private ModelMapper modelMapper;
 
-    public DongSP mapToDomain(DongSPViewModel viewModel) {
+    public DongSP mapToEntity(DongSPViewModel viewModel) {
         return modelMapper.map(viewModel, DongSP.class);
     }
 
@@ -22,8 +22,8 @@ public class DongSPConvert {
         return modelMapper.map(domain, DongSPViewModel.class);
     }
 
-    public List<DongSPViewModel> mapEntityListToViewModelList(List<DongSP> entityList) {
-        return entityList.stream()
+    public List<DongSPViewModel> mapEntityListToViewModelList(List<DongSP> domains) {
+        return domains.stream()
                 .map(entity -> modelMapper.map(entity, DongSPViewModel.class))
                 .collect(Collectors.toList());
     }

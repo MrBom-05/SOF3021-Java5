@@ -14,7 +14,7 @@ public class ChucVuConvert {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ChucVu mapToDomain(ChucVuViewModel viewModel) {
+    public ChucVu mapToEntity(ChucVuViewModel viewModel) {
         return modelMapper.map(viewModel, ChucVu.class);
     }
 
@@ -22,9 +22,9 @@ public class ChucVuConvert {
         return modelMapper.map(domain, ChucVuViewModel.class);
     }
 
-    public List<ChucVuViewModel> mapEntityListToViewModelList(List<ChucVu> entityList) {
-        return entityList.stream()
-                .map(entity -> modelMapper.map(entity, ChucVuViewModel.class))
-                .collect(Collectors.toList());
+    public List<ChucVuViewModel> mapEntityListToViewModelList(List<ChucVu> domains) {
+        return domains.stream()
+                .map(domain -> mapToViewModel(domain))
+                .collect(java.util.stream.Collectors.toList());
     }
 }

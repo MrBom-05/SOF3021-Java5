@@ -12,7 +12,7 @@
 
 <%--@elvariable id="nsx" type="java"--%>
 <form:form class="col-6 offset-3 mt-5 border p-4" method="POST"
-           action="/admin/nsx/create" modelAttribute="nsx">
+           action="/admin/nsx/update/${nsx.id}" modelAttribute="nsx">
 
     <div class="col-12">
         <label class="form-label">Mã<span class="text-danger">*</span></label>

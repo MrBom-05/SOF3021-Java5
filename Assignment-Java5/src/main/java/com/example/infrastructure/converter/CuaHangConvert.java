@@ -14,7 +14,7 @@ public class CuaHangConvert {
     @Autowired
     private ModelMapper modelMapper;
 
-    public CuaHang mapToDomain(CuaHangViewModel viewModel) {
+    public CuaHang mapToEntity(CuaHangViewModel viewModel) {
         return modelMapper.map(viewModel, CuaHang.class);
     }
 
@@ -22,8 +22,8 @@ public class CuaHangConvert {
         return modelMapper.map(domain, CuaHangViewModel.class);
     }
 
-    public List<CuaHangViewModel> mapEntityListToViewModelList(List<CuaHang> entityList) {
-        return entityList.stream()
+    public List<CuaHangViewModel> mapEntityListToViewModelList(List<CuaHang> domains) {
+        return domains.stream()
                 .map(entity -> modelMapper.map(entity, CuaHangViewModel.class))
                 .collect(Collectors.toList());
     }

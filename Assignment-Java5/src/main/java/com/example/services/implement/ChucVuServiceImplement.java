@@ -30,7 +30,7 @@ public class ChucVuServiceImplement implements ChucVuService {
 
     @Override
     public void saveOrUpdate(ChucVuViewModel chucVuViewModel) {
-        ChucVu chucVu = chucVuConvert.mapToDomain(chucVuViewModel);
+        ChucVu chucVu = chucVuConvert.mapToEntity(chucVuViewModel);
         if (chucVuViewModel.getId() != null && chucVuRepository.existsById(chucVuViewModel.getId())) {
             chucVuRepository.save(chucVu);
         } else {

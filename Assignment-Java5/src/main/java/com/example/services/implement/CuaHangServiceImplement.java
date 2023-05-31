@@ -30,8 +30,8 @@ public class CuaHangServiceImplement implements CuaHangService {
 
     @Override
     public void saveOrUpdate(CuaHangViewModel cuaHangViewModel) {
-        CuaHang cuaHang = cuaHangConvert.mapToDomain(cuaHangViewModel);
-        if (cuaHangViewModel.getId() != null && cuaHangRepository.existsById(cuaHangViewModel.getId())){
+        CuaHang cuaHang = cuaHangConvert.mapToEntity(cuaHangViewModel);
+        if (cuaHangViewModel.getId() != null && cuaHangRepository.existsById(cuaHangViewModel.getId())) {
             cuaHangRepository.save(cuaHang);
         } else {
             cuaHang.setMa(serialNumberGenerator.generateSerialNumber());

@@ -1,9 +1,80 @@
 package com.example.controllers.admin;
 
+import com.example.models.MauSacViewModel;
+import com.example.services.MauSacService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("admin/mau-sac")
 public class MauSacController {
+    @Autowired
+    private MauSacService mauSacService;
+
+    @Autowired
+    private MauSacViewModel mauSacViewModel;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    private static final String redirect = "redirect:/admin/mau-sac/index";
+
+    @GetMapping("index")
+    public String index(Model model) {
+        model.addAttribute("list", mauSacService.findAll());
+        request.setAttribute("view", "/views/admin/mau-sac/index.jsp");
+        return "admin/layout";
+    }
+
+    @GetMapping("create")
+    public String createGet(Model model) {
+        model.addAttribute("mauSac", mauSacViewModel);
+        request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
+        return "admin/layout";
+    }
+
+    @GetMapping("update/{id}")
+    public String updateGet(Model model, @PathVariable("id") UUID id) {
+        model.addAttribute("mauSac", mauSacService.findById(id));
+        request.setAttribute("view", "/views/admin/mau-sac/update.jsp");
+        return "admin/layout";
+    }
+
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable("id") UUID id) {
+        mauSacService.deleteById(id);
+        return redirect;
+    }
+
+    @PostMapping("create")
+    public String createPost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result) {
+        if (result.hasErrors()) {
+            request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
+            return "admin/layout";
+        } else {
+            mauSacService.saveOrUpdate(mauSacViewModel);
+            return redirect;
+        }
+
+    }
+
+    @PostMapping("update/{id}")
+    public String updatePost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result, @PathVariable("id") UUID id) {
+        if (result.hasErrors()) {
+            request.setAttribute("view", "/views/admin/mau-sac/update.jsp");
+            return "admin/layout";
+        } else {
+            mauSacViewModel.setId(id);
+            mauSacService.saveOrUpdate(mauSacViewModel);
+            return redirect;
+        }
+    }
+
 }

@@ -53,8 +53,8 @@
                 <td>${ nhanVien.ngaySinh }</td>
                 <td>${ nhanVien.sdt }</td>
                 <td>${ nhanVien.diaChi }</td>
-                <td>${ nhanVien.cuaHang }</td>
-                <td>${ nhanVien.chucVu }</td>
+                <td>${ nhanVien.cuaHang.ten }</td>
+                <td>${ nhanVien.chucVu.ten }</td>
                 <td>${ nhanVien.email }</td>
                 <td>${ nhanVien.matKhau }</td>
                 <td>${ nhanVien.trangThai == 1 ? "Đang Làm" : "Đã Nghỉ" }</td>

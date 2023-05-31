@@ -29,8 +29,8 @@ public class DongSPServiceImplement implements DongSPService {
 
     @Override
     public void saveOrUpdate(DongSPViewModel dongSPViewModel) {
-        DongSP dongSP = dongSPConvert.mapToDomain(dongSPViewModel);
-        if (dongSPViewModel.getId() != null && dongSPRepository.existsById(dongSPViewModel.getId())){
+        DongSP dongSP = dongSPConvert.mapToEntity(dongSPViewModel);
+        if (dongSPViewModel.getId() != null && dongSPRepository.existsById(dongSPViewModel.getId())) {
             dongSPRepository.save(dongSP);
         } else {
             dongSP.setMa(serialNumberGenerator.generateSerialNumber());

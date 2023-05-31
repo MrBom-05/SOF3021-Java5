@@ -8,73 +8,77 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <h2 class="mt-3 text-center">Thêm Mới Nhân Viên</h2>
 
-<form class="row g-3 col-10 offset-1 mt-3 border p-4" novalidate method="POST"
-      action="/Assignment_war_exploded/admin/nhan-vien/store" id="form">
+<%--@elvariable id="nhanVien" type="java"--%>
+<form:form class="row g-3 col-10 offset-1 mt-3 border p-4" method="POST"
+      action="/admin/nhan-vien/create" modelAttribute="nhanVien">
 
     <div class="col-md-4">
         <label class="form-label">Tên<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="ten" required onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="ten"/>
+        <form:errors path="ten" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Tên Đệm<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="tenDem" required
-               onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="tenDem"/>
+        <form:errors path="tenDem" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Họ<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="ho" required onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="ho"/>
+        <form:errors path="ho" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Ngày Sinh<span class="text-danger">*</span></label>
-        <input type="date" class="form-control" name="ngaySinh" required
-               onblur="validateRed(this)">
+        <form:input type="date" class="form-control" path="ngaySinh"/>
+        <form:errors path="ngaySinh" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">SDT<span class="text-danger">*</span></label>
-        <input type="number" class="form-control" name="sdt" required
-               onblur="validateRed(this)">
+        <form:input type="number" class="form-control" path="sdt"/>
+        <form:errors path="sdt" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Email<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="email" required
-               onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="email"/>
+        <form:errors path="email" cssClass="text-danger"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Địa Chỉ<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="diaChi" required
-               onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="diaChi"/>
     </div>
     <div class="col-md-4">
         <label class="form-label">Cửa Hàng<span class="text-danger">*</span></label>
-        <select class="form-select" name="idCuaHang">
+        <form:select class="form-select" name="idCuaHang" path="cuaHang">
             <option value="false" disabled selected>-- Chọn Của Hàng --</option>
             <c:forEach var="cuaHang" items="${listCuaHang}">
                 <option value="${cuaHang.id}">${cuaHang.ten}</option>
             </c:forEach>
-        </select>
+        </form:select>
     </div>
     <div class="col-md-4">
         <label class="form-label">Chức Vụ<span class="text-danger">*</span></label>
-        <select class="form-select" name="idChucVu">
+        <form:select class="form-select" name="idChucVu" path="chucVu">
             <option value="false" disabled selected>-- Chọn Chức Vụ --</option>
             <c:forEach var="chucVu" items="${listChucVu}">
                 <option value="${chucVu.id}">${chucVu.ten}</option>
             </c:forEach>
-        </select>
+        </form:select>
     </div>
 
     <div class="col-md-4">
         <label class="form-label">Mật Khẩu<span class="text-danger">*</span></label>
-        <input type="password" class="form-control" name="matKhau" required
-               onblur="validateRed(this)">
+        <form:input type="password" class="form-control" path="matKhau"/>
+        <form:errors path="matKhau" cssClass="text-danger"/>
     </div>
 
     <div class="col-md-4">
         <label class="form-label">Mã<span class="text-danger">*</span></label>
-        <input type="text" class="form-control" name="ma" required onblur="validateRed(this)">
+        <form:input type="text" class="form-control" path="ma"/>
+        <form:errors path="ma" cssClass="text-danger"/>
     </div>
 
     <div class="col-md-4">
@@ -94,18 +98,17 @@
 
     <div class="col-md-4 offset-4">
         <label class="form-label">Trạng Thái<span class="text-danger">*</span></label>
-        <select class="form-select" name="trangThai">
+        <form:select class="form-select" name="trangThai" path="trangThai">
             <option value="false" disabled selected>-- Chọn Trạng Thái --</option>
             <option value="1">Đang Làm</option>
             <option value="0">Đã Nghỉ</option>
-        </select>
+        </form:select>
     </div>
 
     <div class="col-12 mt-5">
-        <%--        onclick="return validateForm(event, 'form')"--%>
         <button class="btn btn-primary col-2 offset-5" type="submit">Add</button>
     </div>
 
-</form>
+</form:form>
 
 

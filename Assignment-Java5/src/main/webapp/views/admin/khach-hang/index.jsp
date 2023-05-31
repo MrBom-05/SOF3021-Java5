@@ -34,7 +34,6 @@
             <th>Thành Phố</th>
             <th>Quốc Gia</th>
             <th>Email</th>
-            <th>Mật Khẩu</th>
             <th class="col-2 text-center">Action</th>
         </tr>
         </thead>
@@ -53,7 +52,6 @@
                 <td>${ khachHang.thanhPho }</td>
                 <td>${ khachHang.quocGia }</td>
                 <td>${ khachHang.email }</td>
-                <td>${ khachHang.matKhau }</td>
 
                 <td class="text-center">
                     <a href="/admin/khach-hang/update/${ khachHang.id }"
