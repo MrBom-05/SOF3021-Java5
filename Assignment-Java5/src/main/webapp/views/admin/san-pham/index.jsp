@@ -36,7 +36,7 @@
                 <td>${status.index + 1}</td>
                 <td>${ sanPham.ma }</td>
                 <td>${ sanPham.ten }</td>
-                <td><img src="${ sanPham.anh }" width="200px" height="200px"></td>
+                <td><img src="/Assignment-Java5/${sanPham.anh}" width="200px" height="200px"></td>
 
                 <td class="text-center">
                     <a href="/admin/san-pham/update/${ sanPham.id }"

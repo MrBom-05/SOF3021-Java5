@@ -10,46 +10,46 @@
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h2 class="mt-3 text-center">Thêm Mới Chi Tiết Sản Phẩm</h2>
+<h2 class="mt-3 text-center">${name} Chi Tiết Sản Phẩm</h2>
 
 <%--@elvariable id="chiTietSP" type="java"--%>
 <form:form class="row g-3 col-10 offset-1 mt-3 border p-4" method="POST"
-      action="/admin/chi-tiet-sp/create" modelAttribute="chiTietSP">
+      action="${action}" modelAttribute="chiTietSP">
 
     <div class="col-md-6">
         <label class="form-label">Sản Phẩm<span class="text-danger">*</span></label>
-        <form:select class="form-select" path="idSP">
+        <form:select class="form-select" path="sanPham">
             <option value="false" disabled selected>-- Chọn Sản Phẩm --</option>
             <c:forEach var="sanPham" items="${listSanPham}">
-                <form:option value="${sanPham.id}">${sanPham.ten}</form:option>
+                <option value="${sanPham.id}" ${sanPham.id == chiTietSP.sanPham.id ? "selected" : ""}>${sanPham.ten}</option>
             </c:forEach>
         </form:select>
     </div>
     <div class="col-md-6">
         <label class="form-label">Màu Sắc<span class="text-danger">*</span></label>
-        <form:select class="form-select" path="idMauSac">
+        <form:select class="form-select" path="mauSac">
             <option value="false" disabled selected>-- Chọn Màu Sắc --</option>
             <c:forEach var="mauSac" items="${listMauSac}">
-                <form:option value="${mauSac.id}">${mauSac.ten}</form:option>
+                <option value="${mauSac.id}" ${mauSac.id == chiTietSP.mauSac.id ? "selected" : ""}>${mauSac.ten}</option>
             </c:forEach>
         </form:select>
     </div>
 
     <div class="col-md-6">
         <label class="form-label">Dòng SP<span class="text-danger">*</span></label>
-        <form:select class="form-select" path="idDongSP">
+        <form:select class="form-select" path="dongSP">
             <option value="false" disabled selected>-- Chọn Dòng SP --</option>
             <c:forEach var="dongSP" items="${listDongSP}">
-                <form:option value="${dongSP.id}">${dongSP.ten}</form:option>
+                <option value="${dongSP.id}" ${dongSP.id == chiTietSP.dongSP.id ? "selected" : ""}>${dongSP.ten}</option>
             </c:forEach>
         </form:select>
     </div>
     <div class="col-md-6">
         <label class="form-label">Nhà Sản Xuất<span class="text-danger">*</span></label>
-        <form:select class="form-select" name="idNSX" path="idNSX">
+        <form:select class="form-select" path="nsx">
             <option value="false" disabled selected>-- Chọn Nhà Sản Xuất --</option>
             <c:forEach var="nsx" items="${listNSX}">
-                <form:option value="${nsx.id}">${nsx.ten}</form:option>
+                <option value="${nsx.id}" ${nsx.id == chiTietSP.nsx.id ? "selected" : ""}>${nsx.ten}</option>
             </c:forEach>
         </form:select>
     </div>
@@ -82,7 +82,7 @@
 
 
     <div class="col-12 mt-5">
-        <button class="btn btn-primary col-2 offset-5" type="submit">Add</button>
+        <button class="btn btn-primary col-2 offset-5" type="submit">${name}</button>
     </div>
 
 </form:form>

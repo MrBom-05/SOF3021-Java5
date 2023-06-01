@@ -2,10 +2,6 @@ package com.example.models;
 
 import com.example.entities.ChucVu;
 import com.example.entities.CuaHang;
-import com.example.entities.NhanVien;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

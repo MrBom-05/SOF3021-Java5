@@ -57,9 +57,6 @@ public class NhanVienController {
         NhanVienViewModel nhanVienViewModel = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nhanVienViewModel);
 
-//        model.addAttribute("idCuaHang", nhanVienViewModel.getCuaHang().getId());
-//        model.addAttribute("idChucVu", nhanVienViewModel.getChucVu().getId());
-
         model.addAttribute("listCuaHang", cuaHangService.findAll());
         model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("name", "Update");
@@ -96,8 +93,8 @@ public class NhanVienController {
             model.addAttribute("nhanVien", nhanVienViewModel);
             model.addAttribute("listCuaHang", cuaHangService.findAll());
             model.addAttribute("listChucVu", chucVuService.findAll());
-            model.addAttribute("name", "Add");
-            model.addAttribute("action", "/admin/nhan-vien/create");
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/nhan-vien/update/" + id);
             request.setAttribute("view", "/views/admin/nhan-vien/create.jsp");
             return "admin/layout";
         } else {

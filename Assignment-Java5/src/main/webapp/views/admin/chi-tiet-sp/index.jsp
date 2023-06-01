@@ -42,11 +42,11 @@
         <c:forEach var="chiTietSP" items="${ list }" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${ chiTietSP.ma }</td>
-                <td>${ chiTietSP.ten }</td>
-                <td>${ chiTietSP.nsx }</td>
-                <td>${ chiTietSP.mauSac }</td>
-                <td>${ chiTietSP.dongSP }</td>
+                <td>${ chiTietSP.sanPham.ma }</td>
+                <td>${ chiTietSP.sanPham.ten }</td>
+                <td>${ chiTietSP.nsx.ten }</td>
+                <td>${ chiTietSP.mauSac.ten }</td>
+                <td>${ chiTietSP.dongSP.ten }</td>
                 <td>${ chiTietSP.namSX }</td>
                 <td>${ chiTietSP.moTa }</td>
                 <td>${ chiTietSP.soLuongTon }</td>
@@ -54,7 +54,7 @@
                 <td>${ chiTietSP.giaBan }</td>
 
                 <td class="text-center">
-                    <a href=/admin/chi-tiet-sp/update/${ chiTietSP.id }"
+                    <a href="/admin/chi-tiet-sp/update/${ chiTietSP.id }"
                        class="btn btn-primary">Update</a>
                     <a href="/admin/chi-tiet-sp/delete/${ chiTietSP.id }"
                        class="btn btn-danger delete" onclick="return confirm('Bạn có muốn xóa không ?')">Delete</a>

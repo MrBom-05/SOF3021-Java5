@@ -79,16 +79,16 @@ public class SanPhamController {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             // Lưu đường dẫn tới ảnh vào cơ sở dữ liệu
-            if (result.hasErrors()) {
-                model.addAttribute("name", "Add");
-                model.addAttribute("action", "/admin/san-pham/create");
-                request.setAttribute("view", "/views/admin/san-pham/create.jsp");
-                return "admin/layout";
-            } else {
+//            if (result.hasErrors()) {
+//                model.addAttribute("name", "Add");
+//                model.addAttribute("action", "/admin/san-pham/create");
+//                request.setAttribute("view", "/views/admin/san-pham/create.jsp");
+//                return "admin/layout";
+//            } else {
                 sanPhamViewModel.setAnh(filePath.toString());
                 sanPhamService.saveOrUpdate(sanPhamViewModel);
                 return redidect;
-            }
+//            }
         } catch (IOException e) {
             // Xử lý lỗi khi lưu tệp
             return "redirect:/error";
