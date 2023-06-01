@@ -38,6 +38,8 @@ public class ChucVuController {
     @GetMapping("create")
     public String create(Model model) {
         model.addAttribute("chucVu", chucVuViewModel);
+        model.addAttribute("name", "Add");
+        model.addAttribute("action", "/admin/chuc-vu/create");
         request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
         return "admin/layout";
     }
@@ -45,7 +47,9 @@ public class ChucVuController {
     @GetMapping("update/{id}")
     public String updateGet(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("chucVu", chucVuService.findById(id));
-        request.setAttribute("view", "/views/admin/chuc-vu/update.jsp");
+        model.addAttribute("name", "Update");
+        model.addAttribute("action", "/admin/chuc-vu/update/" + id);
+        request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
         return "admin/layout";
     }
 
@@ -56,8 +60,10 @@ public class ChucVuController {
     }
 
     @PostMapping("create")
-    public String createPost(@Valid @ModelAttribute("chucVu") ChucVuViewModel chucVu, BindingResult result) {
+    public String createPost(@Valid @ModelAttribute("chucVu") ChucVuViewModel chucVu, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Add");
+            model.addAttribute("action", "/admin/chuc-vu/create");
             request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
             return "admin/layout";
         } else {
@@ -67,8 +73,10 @@ public class ChucVuController {
     }
 
     @PostMapping("update/{id}")
-    public String updatePost(@Valid @ModelAttribute("chucVu") ChucVuViewModel chucVu, BindingResult result, @PathVariable("id") UUID id) {
+    public String updatePost(@Valid @ModelAttribute("chucVu") ChucVuViewModel chucVu, BindingResult result, @PathVariable("id") UUID id, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/chuc-vu/update/" + id);
             request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
             return "admin/layout";
         } else {

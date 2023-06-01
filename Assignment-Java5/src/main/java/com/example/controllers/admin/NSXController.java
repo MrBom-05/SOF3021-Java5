@@ -36,6 +36,8 @@ public class NSXController {
     @GetMapping("create")
     public String createGet(Model model) {
         model.addAttribute("nsx", nsxViewModel);
+        model.addAttribute("name", "Add");
+        model.addAttribute("action", "/admin/nsx/create");
         request.setAttribute("view", "/views/admin/nsx/create.jsp");
         return "admin/layout";
     }
@@ -43,7 +45,9 @@ public class NSXController {
     @GetMapping("update/{id}")
     public String updateGet(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("nsx", nsxService.findById(id));
-        request.setAttribute("view", "/views/admin/nsx/update.jsp");
+        model.addAttribute("name", "Update");
+        model.addAttribute("action", "/admin/nsx/update/" + id);
+        request.setAttribute("view", "/views/admin/nsx/create.jsp");
         return "admin/layout";
     }
 
@@ -54,8 +58,10 @@ public class NSXController {
     }
 
     @PostMapping("create")
-    public String createPost(@Valid @ModelAttribute("nsx") NSXViewModel nsxViewModel, BindingResult result) {
+    public String createPost(@Valid @ModelAttribute("nsx") NSXViewModel nsxViewModel, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Add");
+            model.addAttribute("action", "/admin/nsx/create");
             request.setAttribute("view", "/views/admin/nsx/create.jsp");
             return "admin/layout";
         } else {
@@ -65,9 +71,11 @@ public class NSXController {
     }
 
     @PostMapping("update/{id}")
-    public String updatePost(@Valid @ModelAttribute("nsx") NSXViewModel nsxViewModel, BindingResult result, @PathVariable("id") UUID id) {
+    public String updatePost(@Valid @ModelAttribute("nsx") NSXViewModel nsxViewModel, BindingResult result, @PathVariable("id") UUID id, Model model) {
         if (result.hasErrors()) {
-            request.setAttribute("view", "/views/admin/nsx/update.jsp");
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/nsx/update/" + id);
+            request.setAttribute("view", "/views/admin/nsx/create.jsp");
             return "admin/layout";
         } else {
             nsxViewModel.setId(id);

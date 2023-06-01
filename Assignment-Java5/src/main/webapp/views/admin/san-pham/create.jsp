@@ -8,15 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h2 class="mt-3 text-center">Thêm Mới Sản Phẩm</h2>
+<h2 class="mt-3 text-center">${name} Sản Phẩm</h2>
 
 <%--@elvariable id="sanPham" type="java"--%>
 <form:form class="col-6 offset-3 mt-5 border p-4" method="POST"
-      action="/admin/san-pham/create" modelAttribute="sanPham" enctype="multipart/form-data">
+      action="${action}" modelAttribute="sanPham" enctype="multipart/form-data">
 
     <div class="col-12">
-        <label class="form-label">Mã<span class="text-danger">*</span></label>
-        <form:input type="text" class="form-control" path="ma"/>
+        <label class="form-label">Mã</label>
+        <form:input type="text" class="form-control" path="ma" readonly="true"/>
         <form:errors path="ma" cssClass="text-danger"></form:errors>
     </div>
 
@@ -32,7 +32,7 @@
         <form:errors path="anh" cssClass="text-danger"></form:errors>
     </div>
     <div class="col-12 mt-5">
-        <button class="btn btn-primary col-2 offset-5" type="submit">Add
+        <button class="btn btn-primary col-2 offset-5" type="submit">${name}
         </button>
     </div>
 

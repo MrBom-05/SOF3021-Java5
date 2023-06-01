@@ -36,14 +36,19 @@ public class KhachHangController {
     @GetMapping("create")
     public String createGet(Model model) {
         model.addAttribute("khachHang", khachHangViewModel);
+        model.addAttribute("name", "Add");
+        model.addAttribute("action", "/admin/khach-hang/create");
         request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
         return "admin/layout";
     }
 
     @GetMapping("update/{id}")
     public String updateGet(Model model, @PathVariable("id") UUID id) {
-        model.addAttribute("khachHang", khachHangService.findById(id));
-        request.setAttribute("view", "/views/admin/khach-hang/update.jsp");
+        KhachHangViewModel khachHangViewModel = khachHangService.findById(id);
+        model.addAttribute("khachHang", khachHangViewModel);
+        model.addAttribute("name", "Update");
+        model.addAttribute("action", "/admin/khach-hang/update/" + id + "/" + khachHangViewModel.getMa());
+        request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
         return "admin/layout";
     }
 
@@ -54,8 +59,10 @@ public class KhachHangController {
     }
 
     @PostMapping("create")
-    public String createPost(@Valid @ModelAttribute("khachHang") KhachHangViewModel khachHangViewModel, BindingResult result) {
+    public String createPost(@Valid @ModelAttribute("khachHang") KhachHangViewModel khachHangViewModel, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Add");
+            model.addAttribute("action", "/admin/khach-hang/create");
             request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
             return "admin/layout";
         } else {
@@ -65,9 +72,11 @@ public class KhachHangController {
     }
 
     @PostMapping("update/{id}/{ma}")
-    public String updatePost(@Valid @ModelAttribute("khachHang") KhachHangViewModel khachHangViewModel, BindingResult result, @PathVariable("id") UUID id, @PathVariable("ma") String ma) {
+    public String updatePost(@Valid @ModelAttribute("khachHang") KhachHangViewModel khachHangViewModel, BindingResult result, @PathVariable("id") UUID id, @PathVariable("ma") String ma, Model model) {
         if (result.hasErrors()) {
-            request.setAttribute("view", "/views/admin/khach-hang/update.jsp");
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/khach-hang/update/" + id + "/" + ma);
+            request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
             return "admin/layout";
         } else {
             khachHangViewModel.setId(id);

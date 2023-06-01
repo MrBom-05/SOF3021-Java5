@@ -36,6 +36,8 @@ public class MauSacController {
     @GetMapping("create")
     public String createGet(Model model) {
         model.addAttribute("mauSac", mauSacViewModel);
+        model.addAttribute("name", "Add");
+        model.addAttribute("action", "/admin/mau-sac/create");
         request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
         return "admin/layout";
     }
@@ -43,7 +45,9 @@ public class MauSacController {
     @GetMapping("update/{id}")
     public String updateGet(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("mauSac", mauSacService.findById(id));
-        request.setAttribute("view", "/views/admin/mau-sac/update.jsp");
+        model.addAttribute("name", "Update");
+        model.addAttribute("action", "/admin/mau-sac/update/" + id);
+        request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
         return "admin/layout";
     }
 
@@ -54,8 +58,10 @@ public class MauSacController {
     }
 
     @PostMapping("create")
-    public String createPost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result) {
+    public String createPost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Add");
+            model.addAttribute("action", "/admin/mau-sac/create");
             request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
             return "admin/layout";
         } else {
@@ -66,9 +72,11 @@ public class MauSacController {
     }
 
     @PostMapping("update/{id}")
-    public String updatePost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result, @PathVariable("id") UUID id) {
+    public String updatePost(@Valid @ModelAttribute("mauSac") MauSacViewModel mauSacViewModel, BindingResult result, @PathVariable("id") UUID id, Model model) {
         if (result.hasErrors()) {
-            request.setAttribute("view", "/views/admin/mau-sac/update.jsp");
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/mau-sac/update/" + id);
+            request.setAttribute("view", "/views/admin/mau-sac/create.jsp");
             return "admin/layout";
         } else {
             mauSacViewModel.setId(id);

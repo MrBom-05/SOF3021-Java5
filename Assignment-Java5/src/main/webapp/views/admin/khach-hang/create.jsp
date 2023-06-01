@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h2 class="mt-3 text-center">Thêm Mới Khách Hàng</h2>
+<h2 class="mt-3 text-center">${name} Khách Hàng</h2>
 
 <%--@elvariable id="khachHang" type="java"--%>
 <form:form class="row g-3 col-10 offset-1 mt-5 border p-4" method="POST"
-      action="/admin/khach-hang/create" modelAttribute="khachHang">
+      action="${action}" modelAttribute="khachHang">
 
     <div class="col-md-4">
         <label class="form-label">Tên<span class="text-danger">*</span></label>
@@ -66,7 +66,7 @@
         <form:errors path="matKhau" cssClass="text-danger"></form:errors>
     </div>
     <div class="col-12 mt-5">
-        <button class="btn btn-primary col-2 offset-5" type="submit">Add
+        <button class="btn btn-primary col-2 offset-5" type="submit">${name}
         </button>
     </div>
 

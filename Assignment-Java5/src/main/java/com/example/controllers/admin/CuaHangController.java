@@ -34,6 +34,8 @@ public class CuaHangController {
     @GetMapping("create")
     public String create(Model model) {
         model.addAttribute("cuaHang", cuaHangViewModel);
+        model.addAttribute("name", "Add");
+        model.addAttribute("action", "/admin/cua-hang/create");
         request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
         return "admin/layout";
     }
@@ -41,7 +43,9 @@ public class CuaHangController {
     @GetMapping("update/{id}")
     public String updateGet(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("cuaHang", cuaHangService.findById(id));
-        request.setAttribute("view", "/views/admin/cua-hang/update.jsp");
+        model.addAttribute("name", "Update");
+        model.addAttribute("action", "/admin/mau-sac/update/" + id);
+        request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
         return "admin/layout";
     }
 
@@ -52,8 +56,10 @@ public class CuaHangController {
     }
 
     @PostMapping("create")
-    public String createPost(@Valid @ModelAttribute("cuaHang") CuaHangViewModel cuaHang, BindingResult result) {
+    public String createPost(@Valid @ModelAttribute("cuaHang") CuaHangViewModel cuaHang, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("name", "Add");
+            model.addAttribute("action", "/admin/cua-hang/create");
             request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {
@@ -63,9 +69,11 @@ public class CuaHangController {
     }
 
     @PostMapping("update/{id}")
-    public String updatePost(@Valid @ModelAttribute("cuaHang") CuaHangViewModel cuaHang, BindingResult result, @PathVariable("id") UUID id) {
+    public String updatePost(@Valid @ModelAttribute("cuaHang") CuaHangViewModel cuaHang, BindingResult result, @PathVariable("id") UUID id, Model model) {
         if (result.hasErrors()) {
-            request.setAttribute("view", "/views/admin/cua-hang/update.jsp");
+            model.addAttribute("name", "Update");
+            model.addAttribute("action", "/admin/mau-sac/update/" + id);
+            request.setAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {
             cuaHang.setId(id);

@@ -10,11 +10,11 @@
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h2 class="mt-3 text-center">Thêm Mới Nhân Viên</h2>
+<h2 class="mt-3 text-center">${name} Nhân Viên</h2>
 
 <%--@elvariable id="nhanVien" type="java"--%>
 <form:form class="row g-3 col-10 offset-1 mt-3 border p-4" method="POST"
-      action="/admin/nhan-vien/create" modelAttribute="nhanVien">
+      action="${action}" modelAttribute="nhanVien">
 
     <div class="col-md-4">
         <label class="form-label">Tên<span class="text-danger">*</span></label>
@@ -52,19 +52,19 @@
     </div>
     <div class="col-md-4">
         <label class="form-label">Cửa Hàng<span class="text-danger">*</span></label>
-        <form:select class="form-select" name="idCuaHang" path="cuaHang">
+        <form:select class="form-select" path="cuaHang">
             <option value="false" disabled selected>-- Chọn Của Hàng --</option>
             <c:forEach var="cuaHang" items="${listCuaHang}">
-                <option value="${cuaHang.id}">${cuaHang.ten}</option>
+                <option value="${cuaHang.id}" ${cuaHang.id == nhanVien.cuaHang.id ? "selected" : ""}>${cuaHang.ten}</option>
             </c:forEach>
         </form:select>
     </div>
     <div class="col-md-4">
         <label class="form-label">Chức Vụ<span class="text-danger">*</span></label>
-        <form:select class="form-select" name="idChucVu" path="chucVu">
+        <form:select class="form-select" path="chucVu">
             <option value="false" disabled selected>-- Chọn Chức Vụ --</option>
             <c:forEach var="chucVu" items="${listChucVu}">
-                <option value="${chucVu.id}">${chucVu.ten}</option>
+                <option value="${chucVu.id}" ${chucVu.id == nhanVien.chucVu.id ? "selected" : ""}>${chucVu.ten}</option>
             </c:forEach>
         </form:select>
     </div>
@@ -76,8 +76,8 @@
     </div>
 
     <div class="col-md-4">
-        <label class="form-label">Mã<span class="text-danger">*</span></label>
-        <form:input type="text" class="form-control" path="ma"/>
+        <label class="form-label">Mã</label>
+        <form:input type="text" class="form-control" path="ma" readonly="true"/>
         <form:errors path="ma" cssClass="text-danger"/>
     </div>
 
@@ -85,12 +85,12 @@
         <label class="form-label">Giới Tính</label>
         <div class="row mt-1">
             <div class="form-check col-6">
-                <input class="form-check-input ms-5" value="Nam" type="radio" name="gioiTinh" checked
+                <input ${nhanVien.gioiTinh == "Nam" ? "checked" : ""} class="form-check-input ms-5" value="Nam" type="radio" name="gioiTinh" checked
                        required>
                 <label class="form-check-label ms-2">Nam</label>
             </div>
             <div class="form-check col-6">
-                <input class="form-check-input" value="Nữ" type="radio" name="gioiTinh" required>
+                <input ${nhanVien.gioiTinh == "Nữ" ? "checked" : ""} class="form-check-input" value="Nữ" type="radio" name="gioiTinh" required>
                 <label class="form-check-label">Nữ</label>
             </div>
         </div>
@@ -100,13 +100,13 @@
         <label class="form-label">Trạng Thái<span class="text-danger">*</span></label>
         <form:select class="form-select" name="trangThai" path="trangThai">
             <option value="false" disabled selected>-- Chọn Trạng Thái --</option>
-            <option value="1">Đang Làm</option>
-            <option value="0">Đã Nghỉ</option>
+            <option value="1" ${nhanVien.trangThai == 1 ? "selected" : ""}>Đang Làm</option>
+            <option value="0" ${nhanVien.trangThai == 0 ? "selected" : ""}>Đã Nghỉ</option>
         </form:select>
     </div>
 
     <div class="col-12 mt-5">
-        <button class="btn btn-primary col-2 offset-5" type="submit">Add</button>
+        <button class="btn btn-primary col-2 offset-5" type="submit">${name}</button>
     </div>
 
 </form:form>
