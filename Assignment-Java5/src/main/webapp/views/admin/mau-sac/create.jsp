@@ -23,7 +23,9 @@
     <div class="col-12 mt-3">
         <label class="form-label">Tên<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="ten"/>
-        <form:errors path="ten" cssClass="text-danger"></form:errors>
+        <div class="text-center mt-1">
+            <form:errors path="ten" cssClass="text-danger"></form:errors>
+        </div>
     </div>
     <div class="col-12 mt-5">
         <button class="btn btn-primary col-2 offset-5" type="submit">${name}</button>

@@ -21,15 +21,13 @@ public class KhachHangController {
     @Autowired
     private KhachHangViewModel khachHangViewModel;
 
-    @Autowired
-    private HttpServletRequest request;
 
     public static final String redirect = "redirect:/admin/khach-hang/index";
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", khachHangService.findAll());
-        request.setAttribute("view", "/views/admin/khach-hang/index.jsp");
+        model.addAttribute("view", "/views/admin/khach-hang/index.jsp");
         return "admin/layout";
     }
 
@@ -38,7 +36,7 @@ public class KhachHangController {
         model.addAttribute("khachHang", khachHangViewModel);
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/khach-hang/create");
-        request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
+        model.addAttribute("view", "/views/admin/khach-hang/create.jsp");
         return "admin/layout";
     }
 
@@ -48,7 +46,7 @@ public class KhachHangController {
         model.addAttribute("khachHang", khachHangViewModel);
         model.addAttribute("name", "Update");
         model.addAttribute("action", "/admin/khach-hang/update/" + id + "/" + khachHangViewModel.getMa());
-        request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
+        model.addAttribute("view", "/views/admin/khach-hang/create.jsp");
         return "admin/layout";
     }
 
@@ -63,7 +61,7 @@ public class KhachHangController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/khach-hang/create");
-            request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
+            model.addAttribute("view", "/views/admin/khach-hang/create.jsp");
             return "admin/layout";
         } else {
             khachHangService.saveOrUpdate(khachHangViewModel);
@@ -76,7 +74,7 @@ public class KhachHangController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Update");
             model.addAttribute("action", "/admin/khach-hang/update/" + id + "/" + ma);
-            request.setAttribute("view", "/views/admin/khach-hang/create.jsp");
+            model.addAttribute("view", "/views/admin/khach-hang/create.jsp");
             return "admin/layout";
         } else {
             khachHangViewModel.setId(id);

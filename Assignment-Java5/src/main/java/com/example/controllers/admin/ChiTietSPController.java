@@ -35,15 +35,13 @@ public class ChiTietSPController {
     @Autowired
     private ChiTietSPViewModel chiTietSPViewModel;
 
-    @Autowired
-    private HttpServletRequest request;
 
     private static final String redirect = "redirect:/admin/chi-tiet-sp/index";
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", chiTietSPService.findAll());
-        request.setAttribute("view", "/views/admin/chi-tiet-sp/index.jsp");
+        model.addAttribute("view", "/views/admin/chi-tiet-sp/index.jsp");
         return "admin/layout";
     }
 
@@ -56,7 +54,7 @@ public class ChiTietSPController {
         model.addAttribute("listNSX", nSXService.findAll());
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/chi-tiet-sp/create");
-        request.setAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
+        model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
         return "admin/layout";
     }
 
@@ -69,7 +67,7 @@ public class ChiTietSPController {
         model.addAttribute("listNSX", nSXService.findAll());
         model.addAttribute("name", "Update");
         model.addAttribute("action", "/admin/chi-tiet-sp/update/" + id);
-        request.setAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
+        model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
         return "admin/layout";
     }
 
@@ -88,7 +86,7 @@ public class ChiTietSPController {
             model.addAttribute("listNSX", nSXService.findAll());
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/chi-tiet-sp/create");
-            request.setAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
+            model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
             return "admin/layout";
         } else {
             chiTietSPService.saveOrUpdate(chiTietSPViewModel);
@@ -101,7 +99,7 @@ public class ChiTietSPController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Update");
             model.addAttribute("action", "/admin/chi-tiet-sp/update/" + id);
-            request.setAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
+            model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
             return "admin/layout";
         } else {
             chiTietSPService.saveOrUpdate(chiTietSPViewModel);

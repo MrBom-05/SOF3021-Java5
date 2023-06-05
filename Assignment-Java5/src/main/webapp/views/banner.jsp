@@ -10,15 +10,15 @@
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/Assignment_war_exploded/views/user/img/522_attimg1_origin.jpg" class="d-block w-100"
+            <img src="/img/522_attimg1_origin.jpg" class="d-block w-100"
                  alt="...">
         </div>
         <div class="carousel-item">
-            <img src="/Assignment_war_exploded/views/user/img/523_attimg1_origin.jpg" class="d-block w-100"
+            <img src="/img/523_attimg1_origin.jpg" class="d-block w-100"
                  alt="...">
         </div>
         <div class="carousel-item">
-            <img src="/Assignment_war_exploded/views/user/img/525_attimg1_origin.jpg" class="d-block w-100"
+            <img src="/img/525_attimg1_origin.jpg" class="d-block w-100"
                  alt="...">
         </div>
     </div>

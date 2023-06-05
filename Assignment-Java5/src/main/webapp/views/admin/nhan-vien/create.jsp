@@ -8,47 +8,62 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h2 class="mt-3 text-center">${name} Nhân Viên</h2>
 
 <%--@elvariable id="nhanVien" type="java"--%>
 <form:form class="row g-3 col-10 offset-1 mt-3 border p-4" method="POST"
-      action="${action}" modelAttribute="nhanVien">
+           action="${action}" modelAttribute="nhanVien">
 
     <div class="col-md-4">
         <label class="form-label">Tên<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="ten"/>
-        <form:errors path="ten" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="ten" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Tên Đệm<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="tenDem"/>
-        <form:errors path="tenDem" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="tenDem" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Họ<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="ho"/>
-        <form:errors path="ho" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="ho" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Ngày Sinh<span class="text-danger">*</span></label>
         <form:input type="date" class="form-control" path="ngaySinh"/>
-        <form:errors path="ngaySinh" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="ngaySinh" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">SDT<span class="text-danger">*</span></label>
         <form:input type="number" class="form-control" path="sdt"/>
-        <form:errors path="sdt" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="sdt" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Email<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="email"/>
-        <form:errors path="email" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="email" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Địa Chỉ<span class="text-danger">*</span></label>
         <form:input type="text" class="form-control" path="diaChi"/>
+        <div class="text-center">
+            <form:errors path="diaChi" cssClass="text-danger"/>
+        </div>
     </div>
     <div class="col-md-4">
         <label class="form-label">Cửa Hàng<span class="text-danger">*</span></label>
@@ -72,25 +87,31 @@
     <div class="col-md-4">
         <label class="form-label">Mật Khẩu<span class="text-danger">*</span></label>
         <form:input type="password" class="form-control" path="matKhau"/>
-        <form:errors path="matKhau" cssClass="text-danger"/>
+        <div class="text-center">
+            <form:errors path="matKhau" cssClass="text-danger"/>
+        </div>
     </div>
 
     <div class="col-md-4">
         <label class="form-label">Mã</label>
         <form:input type="text" class="form-control" path="ma" readonly="true"/>
-        <form:errors path="ma" cssClass="text-danger"/>
+        <div>
+            <form:errors path="ma" cssClass="text-danger"/>
+        </div>
     </div>
 
     <div class="col-md-4">
         <label class="form-label">Giới Tính</label>
         <div class="row mt-1">
             <div class="form-check col-6">
-                <input ${nhanVien.gioiTinh == "Nam" ? "checked" : ""} class="form-check-input ms-5" value="Nam" type="radio" name="gioiTinh" checked
-                       required>
+                <input ${nhanVien.gioiTinh == "Nam" ? "checked" : ""} class="form-check-input ms-5" value="Nam"
+                                                                      type="radio" name="gioiTinh" checked
+                                                                      required>
                 <label class="form-check-label ms-2">Nam</label>
             </div>
             <div class="form-check col-6">
-                <input ${nhanVien.gioiTinh == "Nữ" ? "checked" : ""} class="form-check-input" value="Nữ" type="radio" name="gioiTinh" required>
+                <input ${nhanVien.gioiTinh == "Nữ" ? "checked" : ""} class="form-check-input" value="Nữ" type="radio"
+                                                                     name="gioiTinh" required>
                 <label class="form-check-label">Nữ</label>
             </div>
         </div>

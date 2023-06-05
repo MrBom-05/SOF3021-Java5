@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <title>Đăng Nhập</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <style>
         body {
             background-color: #eee;
@@ -68,49 +70,43 @@
         <h4 class="text-center">Login</h4>
     </div>
     <div class="card-body">
-        <form method="POST"
-              action="/Assignment_war_exploded/admin/login" id="form">
+        <%--@elvariable id="adminAccount" type="java"--%>
+        <form:form method="POST"
+                   action="/admin/login" id="form" modelAttribute="adminAccount">
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
-                <input type="email" class="form-control" id="username" name="email" required>
+                <form:input type="email" class="form-control" id="username" path="email"/>
+                <div class="text-center">
+                    <form:errors path="email" cssClass="text-danger"/>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <form:input type="password" class="form-control" id="password" path="matKhau"/>
+                <div class="text-center">
+                    <form:errors path="matKhau" cssClass="text-danger"/>
+                </div>
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
-<%--            <div class="form-text text-center mt-3">--%>
-<%--                Don't have an account yet? <a href="/Assignment_war_exploded/sign-up">Register now</a>--%>
-<%--            </div>--%>
-<%--            <div class="form-text text-center mt-3">--%>
-<%--                Forgot your password? <a href="#">Reset it here</a>--%>
-<%--            </div>--%>
+            <%--            <div class="form-text text-center mt-3">--%>
+            <%--                Don't have an account yet? <a href="/Assignment_war_exploded/sign-up">Register now</a>--%>
+            <%--            </div>--%>
+            <%--            <div class="form-text text-center mt-3">--%>
+            <%--                Forgot your password? <a href="#">Reset it here</a>--%>
+            <%--            </div>--%>
             <c:if test="${errorMessage eq false}">
                 <div class="alert alert-danger text-center mt-3">
                     Sai tài khoản mật khẩu
                 </div>
             </c:if>
-        </form>
+        </form:form>
     </div>
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/Assignment_war_exploded/js/bootstrap.min.js"></script>
-<script>
-    const form = document.getElementById('form');
-    form.addEventListener('submit', function (event) {
-        const email = document.querySelector('input[name="email"]');
-        const password = document.querySelector('input[name="password"]');
+<script src="/js/bootstrap.min.js"></script>
 
-        if (!email.value.track === '' || !password.value.trim() === '') {
-            alert("Không được để trống!");
-            event.preventDefault();
-        }
-    });
-
-</script>
 </body>
 </html>

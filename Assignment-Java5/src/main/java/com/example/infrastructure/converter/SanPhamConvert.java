@@ -1,6 +1,7 @@
 package com.example.infrastructure.converter;
 
 import com.example.entities.SanPham;
+import com.example.infrastructure.request.SanPhamRequest;
 import com.example.models.SanPhamViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class SanPhamConvert {
 
     public SanPham mapToEntity(SanPhamViewModel viewModel) {
         return modelMapper.map(viewModel, SanPham.class);
+    }
+
+    public SanPham requestToEntity(SanPhamRequest request) {
+        return modelMapper.map(request, SanPham.class);
     }
 
     public SanPhamViewModel mapToViewModel(SanPham domain) {

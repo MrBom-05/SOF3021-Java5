@@ -19,15 +19,13 @@ public class DongSPController {
     private DongSPService dongSPService;
     @Autowired
     private DongSPViewModel dongSPViewModel;
-    @Autowired
-    private HttpServletRequest request;
 
     private static final String redirect = "redirect:/admin/dong-sp/index";
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", dongSPService.findAll());
-        request.setAttribute("view", "/views/admin/dong-sp/index.jsp");
+        model.addAttribute("view", "/views/admin/dong-sp/index.jsp");
         return "admin/layout";
     }
 
@@ -36,7 +34,7 @@ public class DongSPController {
         model.addAttribute("dongSP", dongSPViewModel);
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/dong-sp/create");
-        request.setAttribute("view", "/views/admin/dong-sp/create.jsp");
+        model.addAttribute("view", "/views/admin/dong-sp/create.jsp");
         return "admin/layout";
     }
 
@@ -45,7 +43,7 @@ public class DongSPController {
         model.addAttribute("dongSP", dongSPService.findById(id));
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/dong-sp/update/" + id);
-        request.setAttribute("view", "/views/admin/dong-sp/update.jsp");
+        model.addAttribute("view", "/views/admin/dong-sp/update.jsp");
         return "admin/layout";
     }
 
@@ -60,7 +58,7 @@ public class DongSPController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/dong-sp/create");
-            request.setAttribute("view", "/views/admin/dong-sp/create.jsp");
+            model.addAttribute("view", "/views/admin/dong-sp/create.jsp");
             return "admin/layout";
         } else {
             dongSPService.saveOrUpdate(dongSP);
@@ -73,7 +71,7 @@ public class DongSPController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/dong-sp/update/" + id);
-            request.setAttribute("view", "/views/admin/dong-sp/create.jsp");
+            model.addAttribute("view", "/views/admin/dong-sp/create.jsp");
             return "admin/layout";
         } else {
             dongSP.setId(id);

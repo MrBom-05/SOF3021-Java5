@@ -1,6 +1,7 @@
 package com.example.models;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class DongSPViewModel {
     private UUID id;
     private String ma;
+    @Size(max = 30, message = "Tên không được quá 30 ký tự")
     @NotBlank(message = "Tên không được để trống")
     private String ten;
 }

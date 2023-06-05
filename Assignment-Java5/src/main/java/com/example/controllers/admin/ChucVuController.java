@@ -22,16 +22,13 @@ public class ChucVuController {
     @Autowired
     private ChucVuViewModel chucVuViewModel;
 
-    @Autowired
-    private HttpServletRequest request;
-
     private static final String redirect = "redirect:/admin/chuc-vu/index";
 
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", chucVuService.findAll());
-        request.setAttribute("view", "/views/admin/chuc-vu/index.jsp");
+        model.addAttribute("view", "/views/admin/chuc-vu/index.jsp");
         return "admin/layout";
     }
 
@@ -40,7 +37,7 @@ public class ChucVuController {
         model.addAttribute("chucVu", chucVuViewModel);
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/chuc-vu/create");
-        request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
+        model.addAttribute("view", "/views/admin/chuc-vu/create.jsp");
         return "admin/layout";
     }
 
@@ -49,7 +46,7 @@ public class ChucVuController {
         model.addAttribute("chucVu", chucVuService.findById(id));
         model.addAttribute("name", "Update");
         model.addAttribute("action", "/admin/chuc-vu/update/" + id);
-        request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
+        model.addAttribute("view", "/views/admin/chuc-vu/create.jsp");
         return "admin/layout";
     }
 
@@ -64,7 +61,7 @@ public class ChucVuController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/chuc-vu/create");
-            request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
+            model.addAttribute("view", "/views/admin/chuc-vu/create.jsp");
             return "admin/layout";
         } else {
             chucVuService.saveOrUpdate(chucVu);
@@ -77,7 +74,7 @@ public class ChucVuController {
         if (result.hasErrors()) {
             model.addAttribute("name", "Update");
             model.addAttribute("action", "/admin/chuc-vu/update/" + id);
-            request.setAttribute("view", "/views/admin/chuc-vu/create.jsp");
+            model.addAttribute("view", "/views/admin/chuc-vu/create.jsp");
             return "admin/layout";
         } else {
             chucVu.setId(id);

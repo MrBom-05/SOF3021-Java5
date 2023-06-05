@@ -2,6 +2,7 @@ package com.example.services.implement;
 
 import com.example.entities.NhanVien;
 import com.example.infrastructure.converter.NhanVienConvert;
+import com.example.infrastructure.request.AdminAccountRequest;
 import com.example.models.NhanVienViewModel;
 import com.example.repositories.NhanVienRepository;
 import com.example.services.NhanVienService;
@@ -48,6 +49,17 @@ public class NhanVienServiceImplement implements NhanVienService {
         Optional<NhanVien> optional = nhanVienRepository.findById(id);
         if (optional.isPresent()) {
             return nhanVienConvert.mapToViewModel(optional.get());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public NhanVienViewModel login(AdminAccountRequest adminAccountRequest) {
+        NhanVien nhanVien = nhanVienRepository.login(adminAccountRequest.getEmail(), adminAccountRequest.getMatKhau());
+
+        if (nhanVien != null) {
+            return nhanVienConvert.mapToViewModel(nhanVien);
         } else {
             return null;
         }

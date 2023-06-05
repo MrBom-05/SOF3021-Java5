@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.infrastructure.request.AdminAccountRequest;
 import com.example.models.NhanVienViewModel;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface NhanVienService {
     public void saveOrUpdate(NhanVienViewModel nhanVienViewModel);
     public void deleteById(UUID id);
     public NhanVienViewModel findById(UUID id);
+    public NhanVienViewModel login(AdminAccountRequest adminAccountRequest);
 }

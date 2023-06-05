@@ -1,11 +1,13 @@
 package com.example.models;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -16,8 +18,6 @@ import java.util.UUID;
 public class SanPhamViewModel {
     private UUID id;
     private String ma;
-    @NotBlank(message = "Tên không được để trống")
     private String ten;
-    @NotBlank(message = "Ảnh không được để trống")
     private String anh;
 }

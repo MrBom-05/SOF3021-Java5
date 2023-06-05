@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>Home</title>
-    <link href="/Assignment_war_exploded/views/admin/css/styles.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/>
+<%--    <link href="/Assignment_war_exploded/views/admin/css/styles.css" rel="stylesheet"/>--%>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <style>
         .card {
             border: none;
@@ -67,7 +67,7 @@
     <!-- header -->
     <header class="d-flex align-items-center">
         <div class="col-2 mt-4">
-            <img class="img-fluid" src="/Assignment_war_exploded/views/user/img/logo_hear.png" alt="Logo">
+            <img class="img-fluid" src="/img/logo_hear.png" alt="Logo">
         </div>
         <form class="ms-3 col-4 mt-4 d-flex" role="search">
 
@@ -82,15 +82,15 @@
         </form>
         <nav class="navbar navbar-expand-lg bg-body-tertiary col-6 d-flex justify-content-end mt-4"
              ng-controller="login">
-            <a class="nav-link active me-3" href="/Assignment_war_exploded/login">Đăng
+            <a class="nav-link active me-3" href="/login">Đăng
                 nhập</a>
             <div class="dropdown">
                 <a class="nav-link active me-3" aria-current="page"
-                   href="/Assignment_war_exploded/bill">Đơn Hàng</a>
+                   href="/bill">Đơn Hàng</a>
             </div>
             <div class="shopping-cart d-flex align-items-center">
-                <a href="/Assignment_war_exploded/cart">
-                    <img src="/Assignment_war_exploded/views/user/img/icons8-shopping-cart-30.png" alt="Shopping cart">
+                <a href="/cart">
+                    <img src="/img/icons8-shopping-cart-30.png" alt="Shopping cart">
                     <span class="cart-items ms-2">${index}</span>
                 </a>
             </div>
@@ -100,7 +100,7 @@
     <div class="row mt-3 mb-3 ms-3">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid col-12 ">
-                <a class="navbar-brand col-2 fw-bold " href="/Assignment_war_exploded/home">Trang chủ</a>
+                <a class="navbar-brand col-2 fw-bold " href="/home">Trang chủ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -133,19 +133,19 @@
 <footer class="row mt-5 ">
     <div class="row">
         <div>
-            <p class="mt-3 ms-5"><img src="/Assignment_war_exploded/views/user/img/logo_foot.png" alt="innisfree"></p>
+            <p class="mt-3 ms-5"><img src="./img/logo_foot.png" alt="innisfree"></p>
             <div class="row col-7 ms-4 ">
                 <a href="#" class="facebook col-1">
-                    <img src="/Assignment_war_exploded/views/user/img/icons8-facebook-48.png" class="img-fluid" alt="">
+                    <img src="./img/icons8-facebook-48.png" class="img-fluid" alt="">
                 </a>
                 <a href="#" class="instagram col-1">
-                    <img src="/Assignment_war_exploded/views/user/img/icons8-instagram-48.png" class="img-fluid" alt="">
+                    <img src="/img/icons8-instagram-48.png" class="img-fluid" alt="">
                 </a>
                 <a href="#" class="youtube col-1">
-                    <img src="/Assignment_war_exploded/views/user/img/icons8-youtube-48.png" class="img-fluid " alt="">
+                    <img src="/img/icons8-youtube-48.png" class="img-fluid " alt="">
                 </a>
                 <a href="#" class="zalo col-1">
-                    <img src="/Assignment_war_exploded/views/user/img/icons8-zalo-48.png" class="img-fluid " alt="">
+                    <img src="/img/icons8-zalo-48.png" class="img-fluid " alt="">
                 </a>
                 <div class="float-end">
                     <p class="float-end">ⓒ 2020 innisfree Inc. <br>All rights reserved.</p>

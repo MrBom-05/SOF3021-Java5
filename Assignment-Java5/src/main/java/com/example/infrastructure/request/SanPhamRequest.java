@@ -1,23 +1,28 @@
-package com.example.models;
+package com.example.infrastructure.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Component
-public class MauSacViewModel {
+public class SanPhamRequest {
     private UUID id;
     private String ma;
     @Size(max = 30, message = "Tên không được quá 30 ký tự")
     @NotBlank(message = "Tên không được để trống")
     private String ten;
+    @NotNull(message = "Ảnh không được để trống")
+    private MultipartFile anh;
 }

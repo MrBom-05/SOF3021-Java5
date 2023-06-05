@@ -29,7 +29,7 @@ public class SanPham implements Serializable {
     @Column(name = "Ten", columnDefinition = "Nvarchar(30)")
     private String ten;
 
-    @Column(name = "Anh", columnDefinition = "Nvarchar(max)")
+    @Column(name = "Anh", columnDefinition = "Text")
     private String anh;
     @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
     private List<ChiTietSP> listChiTietSP;

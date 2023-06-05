@@ -29,15 +29,12 @@ public class NhanVienController {
     @Autowired
     private NhanVienViewModel nhanVienViewModel;
 
-    @Autowired
-    private HttpServletRequest request;
-
     private static final String redirect = "redirect:/admin/nhan-vien/index";
 
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute("list", nhanVienService.findAll());
-        request.setAttribute("view", "/views/admin/nhan-vien/index.jsp");
+        model.addAttribute("view", "/views/admin/nhan-vien/index.jsp");
         return "admin/layout";
     }
 
@@ -48,7 +45,7 @@ public class NhanVienController {
         model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/nhan-vien/create");
-        request.setAttribute("view", "/views/admin/nhan-vien/create.jsp");
+        model.addAttribute("view", "/views/admin/nhan-vien/create.jsp");
         return "admin/layout";
     }
 
@@ -61,7 +58,7 @@ public class NhanVienController {
         model.addAttribute("listChucVu", chucVuService.findAll());
         model.addAttribute("name", "Update");
         model.addAttribute("action", "/admin/nhan-vien/update/" + id);
-        request.setAttribute("view", "/views/admin/nhan-vien/create.jsp");
+        model.addAttribute("view", "/views/admin/nhan-vien/create.jsp");
         return "admin/layout";
     }
 
@@ -79,7 +76,7 @@ public class NhanVienController {
             model.addAttribute("listChucVu", chucVuService.findAll());
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/nhan-vien/create");
-            request.setAttribute("view", "/views/admin/nhan-vien/create.jsp");
+            model.addAttribute("view", "/views/admin/nhan-vien/create.jsp");
             return "admin/layout";
         } else {
             nhanVienService.saveOrUpdate(nhanVienViewModel);
@@ -95,7 +92,7 @@ public class NhanVienController {
             model.addAttribute("listChucVu", chucVuService.findAll());
             model.addAttribute("name", "Update");
             model.addAttribute("action", "/admin/nhan-vien/update/" + id);
-            request.setAttribute("view", "/views/admin/nhan-vien/create.jsp");
+            model.addAttribute("view", "/views/admin/nhan-vien/create.jsp");
             return "admin/layout";
         } else {
             nhanVienViewModel.setId(id);
