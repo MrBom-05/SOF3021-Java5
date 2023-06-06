@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -15,5 +17,6 @@ import org.springframework.stereotype.Component;
 public class GioHangChiTietViewModel {
     private GioHang gioHang;
     private ChiTietSP chiTietSP;
-
+    private int soLuong;
+    private BigDecimal donGia;
 }

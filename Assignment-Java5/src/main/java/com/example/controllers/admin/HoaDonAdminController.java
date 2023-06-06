@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("admin/hoa-don")
-public class HoaDonController {
+public class HoaDonAdminController {
 }

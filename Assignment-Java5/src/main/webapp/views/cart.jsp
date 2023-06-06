@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-md-1 col-2">
                                 <a class="btn btn-danger border-1"
-                                   href="/cart-delete/${ghct.id}" type="button">Xoá</a>
+                                   href="/cart/delete/${ghct.id}" type="button">Xoá</a>
                                 <a class="btn btn-success border-1 mt-1"
                                    href="/bill-add/${ghct.id}/${ghct.soLuong}"
                                    type="button">Mua</a>

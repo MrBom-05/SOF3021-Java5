@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("bill")
-public class BillController {
+public class HoaDonController {
 }

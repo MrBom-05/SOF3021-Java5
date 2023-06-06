@@ -12,4 +12,7 @@ import java.util.UUID;
 public interface GioHangRepository extends JpaRepository<GioHang, UUID> {
     @Query("select case when count(gh) > 0 then true else false end from GioHang gh where gh.khachHang.id=:id")
     public boolean existsByKhachHang(@Param("id") UUID id);
+
+    @Query("select gh from GioHang gh where gh.khachHang.id=:id")
+    public GioHang findByKhachHang(@Param("id") UUID id);
 }

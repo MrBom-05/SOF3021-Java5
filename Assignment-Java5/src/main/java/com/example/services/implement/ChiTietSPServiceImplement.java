@@ -10,6 +10,7 @@ import com.example.services.ChiTietSPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,5 +60,24 @@ public class ChiTietSPServiceImplement implements ChiTietSPService {
     @Override
     public SanPhamResponse findBySanPhamResponse(UUID id) {
         return chiTietSPRepository.findBySanPhamResponse(id);
+    }
+
+    @Override
+    public void updateProductQuantity(UUID id, int newQuantity, int oldQuantity) {
+        Optional<ChiTietSP> optional = chiTietSPRepository.findById(id);
+        if (optional.isPresent()) {
+            ChiTietSP chiTietSP = optional.get();
+            int quantity = chiTietSP.getSoLuongTon();
+            int updatedQuantity = quantity - (newQuantity - oldQuantity);
+
+            // Cập nhật số lượng mới vào sản phẩm
+            chiTietSP.setSoLuongTon(updatedQuantity);
+            chiTietSPRepository.save(chiTietSP);
+        }
+    }
+
+    @Override
+    public BigDecimal findByGiaBan(UUID id) {
+        return chiTietSPRepository.findByGiaBan(id);
     }
 }
