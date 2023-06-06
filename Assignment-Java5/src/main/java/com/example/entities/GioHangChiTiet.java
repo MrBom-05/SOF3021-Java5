@@ -1,12 +1,12 @@
 package com.example.entities;
 
+import com.example.infrastructure.primary.GioHangChiTietPrimary;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
@@ -15,7 +15,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table
-public class GioHangChiTiet implements Serializable {
+@IdClass(GioHangChiTietPrimary.class)
+public class GioHangChiTiet {
 
     @Id
     @ManyToOne
@@ -35,11 +36,4 @@ public class GioHangChiTiet implements Serializable {
 
     @Column(name = "DonGiaKhiGiam", columnDefinition = "Decimal(20,0)")
     private BigDecimal donGiaKhiGiam;
-
-    public GioHangChiTiet(GioHang gioHang, ChiTietSP chiTietSP, int soLuong, BigDecimal donGia) {
-        this.gioHang = gioHang;
-        this.chiTietSP = chiTietSP;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
-    }
 }

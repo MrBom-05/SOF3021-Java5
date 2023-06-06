@@ -19,7 +19,7 @@
 
         <h3>${chiTietSP.sanPham.ten}</h3>
         <form novalidate method="POST"
-              action="/cart-add/${chiTietSP.idChiTietSP}">
+              action="/cart/add/${chiTietSP.idChiTietSP}">
             <div class="input-group mb-5 mt-5">
                 <p class="mt-1 fw-bold">Số lượng</p>
 

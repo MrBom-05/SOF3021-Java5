@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.infrastructure.request.UserAccountRequest;
 import com.example.models.KhachHangViewModel;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface KhachHangService {
     public void saveOrUpdate(KhachHangViewModel khachHangViewModel);
     public void deleteById(UUID id);
     public KhachHangViewModel findById(UUID id);
+    public KhachHangViewModel login(UserAccountRequest userAccountRequest);
 }

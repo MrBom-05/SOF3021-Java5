@@ -16,37 +16,37 @@
             <h4 class="text-center">Không có sản phẩm</h4>
         </c:if>
         <c:if test="${ f:length(list) != 0 }">
-            <c:forEach var="sanPham" items="${ list }" varStatus="status">
+            <c:forEach var="ghct" items="${ list }" varStatus="status">
                 <div class="card mb-2 border">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-1">
-                                <img src="${sanPham.anh}" class="img-fluid d-flex" alt="Ảnh sản phẩm">
+                                <img src="${ghct.sanPham.anh}" class="img-fluid d-flex" alt="Ảnh sản phẩm">
                             </div>
                             <div class="col-md-3 col-7">
-                                <a href="/product-detail/${sanPham.id}"
-                                   class="text-decoration-none text-black" scroll-to-top>${sanPham.ten}</a>
+                                <a href="/product-detail/${ghct.sanPham.id}"
+                                   class="text-decoration-none text-black" scroll-to-top>${ghct.sanPham.ten}</a>
                             </div>
                             <div class="col-md-2 col-3">
-                                <a class="text-decoration-none text-black">${sanPham.mauSac}</a>
+                                <a class="text-decoration-none text-black">${ghct.mauSac.ten}</a>
                             </div>
 
                             <div class="col-md-1 col-2">
-                                <span class="text-center text-truncate">$${sanPham.giaBan}</span>
+                                <span class="text-center text-truncate">$${ghct.giaBan}</span>
                             </div>
 
                             <div class="col-md-2 col-3">
                                 <div class="input-group">
                                     <form method="POST"
-                                          action="/cart-update/${sanPham.id}">
+                                          action="/cart-update/${ghct.id}">
                                         <div class="input-group">
-                                            <button onclick="decrease('quantity-${sanPham.id}')"
+                                            <button onclick="decrease('quantity-${ghct.id}')"
                                                     class="btn btn-success ms-2">-
                                             </button>
-                                            <input type="number" class="form-control" id="quantity-${sanPham.id}"
+                                            <input type="number" class="form-control" id="quantity-${ghct.id}"
                                                    name="soLuong"
-                                                   value="${sanPham.soLuong}" readonly min="1">
-                                            <button onclick="increase('quantity-${sanPham.id}')"
+                                                   value="${ghct.soLuong}" readonly min="1">
+                                            <button onclick="increase('quantity-${ghct.id}')"
                                                     class="btn btn-success">+
                                             </button>
                                         </div>
@@ -54,13 +54,13 @@
                                 </div>
                             </div>
                             <div class="col-md-1 col-2">
-                                <span class="text-center text-truncate text-danger">$${sanPham.giaBan * sanPham.soLuong}</span>
+                                <span class="text-center text-truncate text-danger">$${ghct.giaBan * ghct.soLuong}</span>
                             </div>
                             <div class="col-md-1 col-2">
                                 <a class="btn btn-danger border-1"
-                                   href="/cart-delete/${sanPham.id}" type="button">Xoá</a>
+                                   href="/cart-delete/${ghct.id}" type="button">Xoá</a>
                                 <a class="btn btn-success border-1 mt-1"
-                                   href="/bill-add/${sanPham.id}/${sanPham.soLuong}"
+                                   href="/bill-add/${ghct.id}/${ghct.soLuong}"
                                    type="button">Mua</a>
                             </div>
                         </div>

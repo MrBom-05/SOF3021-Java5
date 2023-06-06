@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Đăng Nhập</title>
@@ -68,15 +69,22 @@
         <h4 class="text-center">Login</h4>
     </div>
     <div class="card-body">
-        <form method="POST"
-              action="/sign-in" id="form">
+        <%--@elvariable id="userAccount" type="java"--%>
+        <form:form method="POST"
+                   action="/sign-in" id="form" modelAttribute="userAccount">
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
-                <input type="email" class="form-control" id="username" name="email" required>
+                <form:input type="email" class="form-control" id="username" path="email"/>
+                <div class="text-center">
+                    <form:errors path="email" cssClass="text-danger"/>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <form:input type="password" class="form-control" id="password" path="matKhau"/>
+                <div class="text-center">
+                    <form:errors path="matKhau" cssClass="text-danger"/>
+                </div>
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -87,12 +95,12 @@
             <div class="form-text text-center mt-3">
                 Forgot your password? <a href="#">Reset it here</a>
             </div>
-            <c:if test="${checkLogin eq false}">
+            <c:if test="${errorMessage eq false}">
                 <div class="alert alert-danger text-center mt-3">
                     Sai tài khoản mật khẩu
                 </div>
             </c:if>
-        </form>
+        </form:form>
     </div>
 </div>
 

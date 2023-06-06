@@ -1,8 +1,12 @@
 package com.example.services.implement;
 
 import com.example.entities.KhachHang;
+import com.example.infrastructure.converter.GioHangConvert;
 import com.example.infrastructure.converter.KhachHangConvert;
+import com.example.infrastructure.request.UserAccountRequest;
+import com.example.models.GioHangViewModel;
 import com.example.models.KhachHangViewModel;
+import com.example.repositories.GioHangRepository;
 import com.example.repositories.KhachHangRepository;
 import com.example.services.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,16 @@ public class KhachHangServiceImplement implements KhachHangService {
     private KhachHangRepository khachHangRepository;
 
     @Autowired
+    private GioHangRepository gioHangRepository;
+
+    @Autowired
     private KhachHangConvert khachHangConvert;
+
+    @Autowired
+    private GioHangConvert gioHangConvert;
+
+    @Autowired
+    private GioHangViewModel gioHangViewModel;
 
     private SerialNumberGenerator serialNumberGenerator = new SerialNumberGenerator();
 
@@ -48,6 +61,22 @@ public class KhachHangServiceImplement implements KhachHangService {
         Optional<KhachHang> optional = khachHangRepository.findById(id);
         if (optional.isPresent()) {
             return khachHangConvert.mapToViewModel(optional.get());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public KhachHangViewModel login(UserAccountRequest userAccountRequest) {
+        KhachHang khachHang = khachHangRepository.login(userAccountRequest.getEmail(), userAccountRequest.getMatKhau());
+        if (khachHang != null) {
+            if (!gioHangRepository.existsByKhachHang(khachHang.getId())) {
+                gioHangViewModel.setKhachHang(khachHang);
+                gioHangViewModel.setMa(serialNumberGenerator.generateSerialNumber());
+                gioHangViewModel.setTrangThai(1);
+                gioHangRepository.save(gioHangConvert.mapToEntity(gioHangViewModel));
+            }
+            return khachHangConvert.mapToViewModel(khachHang);
         } else {
             return null;
         }
