@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Đăng Nhập</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <style>
         body {
             background-color: #eee;
@@ -69,7 +69,7 @@
     </div>
     <div class="card-body">
         <form method="POST"
-              action="/Assignment_war_exploded/login" id="form">
+              action="/sign-in" id="form">
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
                 <input type="email" class="form-control" id="username" name="email" required>
@@ -82,7 +82,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
             <div class="form-text text-center mt-3">
-                Don't have an account yet? <a href="/Assignment_war_exploded/sign-up">Register now</a>
+                Don't have an account yet? <a href="/sign-up">Register now</a>
             </div>
             <div class="form-text text-center mt-3">
                 Forgot your password? <a href="#">Reset it here</a>
@@ -96,8 +96,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/Assignment_war_exploded/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script>
     const form = document.getElementById('form');
     form.addEventListener('submit', function (event) {

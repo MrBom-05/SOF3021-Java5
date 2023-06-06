@@ -11,7 +11,6 @@
 <html>
 <head>
     <title>Home</title>
-<%--    <link href="/Assignment_war_exploded/views/admin/css/styles.css" rel="stylesheet"/>--%>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <style>
         .card {
@@ -82,7 +81,7 @@
         </form>
         <nav class="navbar navbar-expand-lg bg-body-tertiary col-6 d-flex justify-content-end mt-4"
              ng-controller="login">
-            <a class="nav-link active me-3" href="/login">Đăng
+            <a class="nav-link active me-3" href="/sign-in">Đăng
                 nhập</a>
             <div class="dropdown">
                 <a class="nav-link active me-3" aria-current="page"

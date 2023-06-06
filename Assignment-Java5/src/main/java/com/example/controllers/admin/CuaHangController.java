@@ -42,7 +42,7 @@ public class CuaHangController {
     public String updateGet(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("cuaHang", cuaHangService.findById(id));
         model.addAttribute("name", "Update");
-        model.addAttribute("action", "/admin/mau-sac/update/" + id);
+        model.addAttribute("action", "/admin/cua-hang/update/" + id);
         model.addAttribute("view", "/views/admin/cua-hang/create.jsp");
         return "admin/layout";
     }
@@ -70,7 +70,7 @@ public class CuaHangController {
     public String updatePost(@Valid @ModelAttribute("cuaHang") CuaHangViewModel cuaHang, BindingResult result, @PathVariable("id") UUID id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("name", "Update");
-            model.addAttribute("action", "/admin/mau-sac/update/" + id);
+            model.addAttribute("action", "/admin/cua-hang/update/" + id);
             model.addAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {

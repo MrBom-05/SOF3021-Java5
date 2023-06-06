@@ -16,25 +16,20 @@
 <div class="row me-3">
     <article class="col-12">
         <div class="row">
-            <c:if test="${ f:length(list) == 0 }">
-                <h4 class="text-center">Không có dữ liệu</h4>
-            </c:if>
-            <c:if test="${ f:length(list) != 0 }">
-                <c:forEach var="sanPham" items="${ list }" varStatus="status">
-                    <div class="col-md-3 col-12">
+            <c:forEach var="chiTietSP" items="${ list }">
+                <div class="col-md-3 col-12">
 
-                        <div class="card ms-3">
-                            <img src="${sanPham.anh}" class="card-img-top img-fluid" alt="...">
-                            <div class="card-body text-center">
-                                <a href="/Assignment_war_exploded/product-detail?id=${sanPham.id}"
-                                   class="card-text" style="text-decoration: none;">${sanPham.ten}</a>
-                                <span class="card text fw-bold">$${sanPham.giaBan}</span>
-                            </div>
+                    <div class="card ms-3">
+                        <img src="${chiTietSP.sanPham.anh}" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body text-center">
+                            <a href="/product-detail/${chiTietSP.sanPham.id}"
+                               class="card-text">${chiTietSP.sanPham.ten}</a>
+                            <span class="card text fw-bold">$${chiTietSP.giaBan}</span>
                         </div>
-
                     </div>
-                </c:forEach>
-            </c:if>
+
+                </div>
+            </c:forEach>
         </div>
     </article>
 </div>

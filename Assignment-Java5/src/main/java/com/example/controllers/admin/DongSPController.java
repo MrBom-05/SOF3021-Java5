@@ -43,7 +43,7 @@ public class DongSPController {
         model.addAttribute("dongSP", dongSPService.findById(id));
         model.addAttribute("name", "Add");
         model.addAttribute("action", "/admin/dong-sp/update/" + id);
-        model.addAttribute("view", "/views/admin/dong-sp/update.jsp");
+        model.addAttribute("view", "/views/admin/dong-sp/create.jsp");
         return "admin/layout";
     }
 

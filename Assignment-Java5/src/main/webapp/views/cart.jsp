@@ -24,7 +24,7 @@
                                 <img src="${sanPham.anh}" class="img-fluid d-flex" alt="Ảnh sản phẩm">
                             </div>
                             <div class="col-md-3 col-7">
-                                <a href="/Assignment_war_exploded/product-detail?id=${sanPham.id}"
+                                <a href="/product-detail/${sanPham.id}"
                                    class="text-decoration-none text-black" scroll-to-top>${sanPham.ten}</a>
                             </div>
                             <div class="col-md-2 col-3">
@@ -38,7 +38,7 @@
                             <div class="col-md-2 col-3">
                                 <div class="input-group">
                                     <form method="POST"
-                                          action="/Assignment_war_exploded/cart-update?id=${sanPham.id}">
+                                          action="/cart-update/${sanPham.id}">
                                         <div class="input-group">
                                             <button onclick="decrease('quantity-${sanPham.id}')"
                                                     class="btn btn-success ms-2">-
@@ -57,10 +57,10 @@
                                 <span class="text-center text-truncate text-danger">$${sanPham.giaBan * sanPham.soLuong}</span>
                             </div>
                             <div class="col-md-1 col-2">
-                                <a class="btn btn-danger border-1" style="width: 70px"
-                                   href="/Assignment_war_exploded/cart-delete?id=${sanPham.id}" type="button">Xoá</a>
-                                <a class="btn btn-success border-1 mt-1" style="width: 70px"
-                                   href="/Assignment_war_exploded/bill-add?id=${sanPham.id}&soLuong=${sanPham.soLuong}"
+                                <a class="btn btn-danger border-1"
+                                   href="/cart-delete/${sanPham.id}" type="button">Xoá</a>
+                                <a class="btn btn-success border-1 mt-1"
+                                   href="/bill-add/${sanPham.id}/${sanPham.soLuong}"
                                    type="button">Mua</a>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
     </div>
     <div class="row">
         <a type="button" class="col-2 offset-9 btn text-white btn-success float-end"
-           href="/Assignment_war_exploded/bill-all">
+           href="/bill-all">
             Mua hàng
         </a>
     </div>

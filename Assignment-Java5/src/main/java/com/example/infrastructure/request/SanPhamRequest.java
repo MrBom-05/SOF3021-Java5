@@ -23,6 +23,5 @@ public class SanPhamRequest {
     @Size(max = 30, message = "Tên không được quá 30 ký tự")
     @NotBlank(message = "Tên không được để trống")
     private String ten;
-    @NotNull(message = "Ảnh không được để trống")
     private MultipartFile anh;
 }

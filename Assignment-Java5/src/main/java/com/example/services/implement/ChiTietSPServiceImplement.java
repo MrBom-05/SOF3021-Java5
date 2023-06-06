@@ -2,6 +2,8 @@ package com.example.services.implement;
 
 import com.example.entities.ChiTietSP;
 import com.example.infrastructure.converter.ChiTietSPConvert;
+import com.example.infrastructure.response.ChiTietSPResponse;
+import com.example.infrastructure.response.SanPhamResponse;
 import com.example.models.ChiTietSPViewModel;
 import com.example.repositories.ChiTietSPRepository;
 import com.example.services.ChiTietSPService;
@@ -47,5 +49,15 @@ public class ChiTietSPServiceImplement implements ChiTietSPService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<ChiTietSPResponse> findAllHomeByChiTietSP() {
+        return chiTietSPRepository.findAllHomeByChiTietSP();
+    }
+
+    @Override
+    public SanPhamResponse findBySanPhamResponse(UUID id) {
+        return chiTietSPRepository.findBySanPhamResponse(id);
     }
 }

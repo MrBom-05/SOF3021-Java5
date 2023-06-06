@@ -59,7 +59,7 @@ public class SanPhamController {
     @PostMapping("create")
     public String createPost(@Valid @ModelAttribute("sanPham") SanPhamRequest sanPhamRequest, BindingResult result, Model model, @RequestParam("anh") MultipartFile file) {
         if (result.hasErrors()) {
-            model.addAttribute("sanPham", sanPhamViewModel);
+            model.addAttribute("sanPham", sanPhamRequest);
             model.addAttribute("name", "Add");
             model.addAttribute("action", "/admin/san-pham/create");
             model.addAttribute("view", "/views/admin/san-pham/create.jsp");
