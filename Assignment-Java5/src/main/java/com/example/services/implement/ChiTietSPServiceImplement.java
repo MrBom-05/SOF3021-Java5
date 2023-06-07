@@ -8,6 +8,9 @@ import com.example.models.ChiTietSPViewModel;
 import com.example.repositories.ChiTietSPRepository;
 import com.example.services.ChiTietSPService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -53,8 +56,8 @@ public class ChiTietSPServiceImplement implements ChiTietSPService {
     }
 
     @Override
-    public List<ChiTietSPResponse> findAllHomeByChiTietSP() {
-        return chiTietSPRepository.findAllHomeByChiTietSP();
+    public Page<ChiTietSPResponse> findAllHomeByChiTietSP(Pageable pageable) {
+        return chiTietSPRepository.findAllHomeByChiTietSP(pageable);
     }
 
     @Override
@@ -69,6 +72,20 @@ public class ChiTietSPServiceImplement implements ChiTietSPService {
             ChiTietSP chiTietSP = optional.get();
             int quantity = chiTietSP.getSoLuongTon();
             int updatedQuantity = quantity - (newQuantity - oldQuantity);
+
+            // Cập nhật số lượng mới vào sản phẩm
+            chiTietSP.setSoLuongTon(updatedQuantity);
+            chiTietSPRepository.save(chiTietSP);
+        }
+    }
+
+    @Override
+    public void updateProductQuantityByDeleteGioHang(UUID id, int oldQuantity) {
+        Optional<ChiTietSP> optional = chiTietSPRepository.findById(id);
+        if (optional.isPresent()) {
+            ChiTietSP chiTietSP = optional.get();
+            int quantity = chiTietSP.getSoLuongTon();
+            int updatedQuantity = quantity + oldQuantity;
 
             // Cập nhật số lượng mới vào sản phẩm
             chiTietSP.setSoLuongTon(updatedQuantity);

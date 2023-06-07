@@ -16,9 +16,8 @@
 <div class="row me-3">
     <article class="col-12">
         <div class="row">
-            <c:forEach var="chiTietSP" items="${ list }">
+            <c:forEach var="chiTietSP" items="${list.content}">
                 <div class="col-md-3 col-12">
-
                     <div class="card ms-3">
                         <img src="${chiTietSP.sanPham.anh}" class="card-img-top img-fluid" alt="...">
                         <div class="card-body text-center">
@@ -27,10 +26,22 @@
                             <span class="card text fw-bold">$${chiTietSP.giaBan}</span>
                         </div>
                     </div>
-
                 </div>
             </c:forEach>
         </div>
     </article>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <c:forEach begin="0" end="${list.totalPages - 1}" varStatus="loop">
+            <li class="page-item">
+                <a class="page-link" href="/home?page=${loop.index}">
+                        ${loop.index + 1}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</nav>
+
 

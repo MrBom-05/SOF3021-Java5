@@ -21,7 +21,7 @@ public class GioHangController {
     @GetMapping("")
     public String index(Model model) {
         KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
-        model.addAttribute("list", gioHangChiTietService.findGiaHangByKhachHang(khachHang.getId()));
+        model.addAttribute("list", gioHangChiTietService.findGioHangByKhachHang(khachHang.getId()));
         model.addAttribute("view", "/views/cart.jsp");
         return "home";
     }
@@ -30,6 +30,13 @@ public class GioHangController {
     public String add(@PathVariable("id") UUID id, @RequestParam("soLuong") int soLuong) {
         KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
         gioHangChiTietService.add(id, soLuong, khachHang);
+        return "redirect:/cart";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(@PathVariable("id") UUID id, @RequestParam("soLuong") int soLuong) {
+        KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        gioHangChiTietService.update(id, soLuong, khachHang);
         return "redirect:/cart";
     }
 

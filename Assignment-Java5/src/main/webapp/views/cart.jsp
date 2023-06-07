@@ -38,7 +38,7 @@
                             <div class="col-md-2 col-3">
                                 <div class="input-group">
                                     <form method="POST"
-                                          action="/cart-update/${ghct.id}">
+                                          action="/cart/update/${ghct.id}">
                                         <div class="input-group">
                                             <button onclick="decrease('quantity-${ghct.id}')"
                                                     class="btn btn-success ms-2">-
@@ -56,11 +56,11 @@
                             <div class="col-md-1 col-2">
                                 <span class="text-center text-truncate text-danger">$${ghct.giaBan * ghct.soLuong}</span>
                             </div>
-                            <div class="col-md-1 col-2">
+                            <div class="col-md-1 col-2 row">
                                 <a class="btn btn-danger border-1"
                                    href="/cart/delete/${ghct.id}" type="button">Xoá</a>
                                 <a class="btn btn-success border-1 mt-1"
-                                   href="/bill-add/${ghct.id}/${ghct.soLuong}"
+                                   href="/bill/add/${ghct.id}/${ghct.soLuong}"
                                    type="button">Mua</a>
                             </div>
                         </div>

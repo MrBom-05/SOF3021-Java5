@@ -1,19 +1,20 @@
 package com.example.controllers;
 
 import com.example.infrastructure.request.UserAccountRequest;
+import com.example.infrastructure.response.ChiTietSPResponse;
 import com.example.models.KhachHangViewModel;
 import com.example.services.ChiTietSPService;
 import com.example.services.KhachHangService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -29,9 +30,11 @@ public class HomeController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("home")
-    public String home(Model model) {
-        model.addAttribute("list", chiTietSPService.findAllHomeByChiTietSP());
+    @GetMapping("/home")
+    public String home(Model model, @RequestParam(defaultValue = "0" ,name = "page") int page) {
+        Pageable pageable = PageRequest.of(page, 4);
+        Page<ChiTietSPResponse> chiTietSPPage = chiTietSPService.findAllHomeByChiTietSP(pageable);
+        model.addAttribute("list", chiTietSPPage);
         model.addAttribute("banner", "/views/banner.jsp");
         model.addAttribute("view", "/views/product.jsp");
         return "home";

@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-2">
                                 <span>Mã Đơn Hàng:</span>
-                                <a href="/bill-detail/${hoaDon.id}"
+                                <a href="/bill/detail/${hoaDon.id}"
                                    class="text-decoration-none text-black" scroll-to-top>${hoaDon.ma}</a>
                             </div>
                             <div class="col-3">

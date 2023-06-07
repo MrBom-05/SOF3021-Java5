@@ -132,10 +132,10 @@
 <footer class="row mt-5 ">
     <div class="row">
         <div>
-            <p class="mt-3 ms-5"><img src="./img/logo_foot.png" alt="innisfree"></p>
+            <p class="mt-3 ms-5"><img src="/img/logo_foot.png" alt="innisfree"></p>
             <div class="row col-7 ms-4 ">
                 <a href="#" class="facebook col-1">
-                    <img src="./img/icons8-facebook-48.png" class="img-fluid" alt="">
+                    <img src="/img/icons8-facebook-48.png" class="img-fluid" alt="">
                 </a>
                 <a href="#" class="instagram col-1">
                     <img src="/img/icons8-instagram-48.png" class="img-fluid" alt="">
@@ -194,9 +194,8 @@
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/Assignment_war_exploded/js/bootstrap.min.js"></script>
-<script src="/Assignment_war_exploded/js/jquery.min.js"></script>
-<script src="/Assignment_war_exploded/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.js"></script>
 </body>
 </html>

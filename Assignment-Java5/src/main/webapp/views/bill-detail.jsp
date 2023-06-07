@@ -19,30 +19,30 @@
         <h4 class="text-center">Không có sản phẩm</h4>
     </c:if>
     <c:if test="${ f:length(list) != 0 }">
-        <c:forEach var="sanPham" items="${ list }" varStatus="status">
+        <c:forEach var="hdct" items="${ list }" varStatus="status">
             <div class="card mb-2 border">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-1">
-                            <img src="${sanPham.anh}" class="img-fluid d-flex" alt="Ảnh sản phẩm">
+                            <img src="${hdct.sanPham.anh}" class="img-fluid d-flex" alt="Ảnh sản phẩm">
                         </div>
                         <div class="col-3">
-                            <a href="/product-detail/${sanPham.id}"
-                               class="text-decoration-none text-black" scroll-to-top>${sanPham.ten}</a>
+                            <a href="/product-detail/${hdct.sanPham.id}"
+                               class="text-decoration-none text-black" scroll-to-top>${hdct.sanPham.ten}</a>
                         </div>
                         <div class="col-2">
-                            <a class="text-decoration-none text-black">${sanPham.mauSac}</a>
-                        </div>
-
-                        <div class="col-2">
-                            <span class="text-center text-truncate">$${sanPham.giaBan}</span>
+                            <a class="text-decoration-none text-black">${hdct.mauSac.ten}</a>
                         </div>
 
                         <div class="col-2">
-                            <span class="text-center text-truncate">${sanPham.soLuong}</span>
+                            <span class="text-center text-truncate">$${hdct.giaBan}</span>
+                        </div>
+
+                        <div class="col-2">
+                            <span class="text-center text-truncate">${hdct.soLuong}</span>
                         </div>
                         <div class="col-2">
-                            <span class="text-center text-truncate text-danger">$${sanPham.giaBan * sanPham.soLuong}</span>
+                            <span class="text-center text-truncate text-danger">$${hdct.giaBan * hdct.soLuong}</span>
                         </div>
                     </div>
                 </div>

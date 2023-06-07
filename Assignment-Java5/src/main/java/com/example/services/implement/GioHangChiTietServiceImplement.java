@@ -8,10 +8,11 @@ import com.example.models.ChiTietSPViewModel;
 import com.example.models.GioHangChiTietViewModel;
 import com.example.models.KhachHangViewModel;
 import com.example.repositories.GioHangChiTietRepository;
-import com.example.repositories.GioHangRepository;
 import com.example.services.ChiTietSPService;
 import com.example.services.GioHangChiTietService;
+import com.example.services.GioHangService;
 import jakarta.transaction.Transactional;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,53 +23,68 @@ import java.util.UUID;
 public class GioHangChiTietServiceImplement implements GioHangChiTietService {
     @Autowired
     private GioHangChiTietRepository gioHangChiTietRepository;
-
     @Autowired
-    private GioHangRepository gioHangRepository;
-
+    private GioHangService gioHangService;
     @Autowired
     private ChiTietSPService chiTietSPService;
     @Autowired
     private GioHangChiTietConvert gioHangChiTietConvert;
     @Autowired
     private ChiTietSPConvert chiTietSPConvert;
-
     @Autowired
     private GioHangChiTietViewModel gioHangChiTietViewModel;
 
     @Override
-    public List<GioHangResponse> findGiaHangByKhachHang(UUID id) {
+    public List<GioHangResponse> findGioHangByKhachHang(UUID id) {
         return gioHangChiTietRepository.findGiaHangByKhachHang(id);
     }
 
     @Override
-    public void add(UUID id, int soLuong, KhachHangViewModel khachHangViewModel) {
+    public void add(UUID idSP, int soLuong, KhachHangViewModel khachHangViewModel) {
 
-        GioHang gioHang = gioHangRepository.findByKhachHang(khachHangViewModel.getId());
-        ChiTietSPViewModel chiTietSPViewModel = chiTietSPService.findById(id);
+        GioHang gioHang = gioHangService.findByKhachHang(khachHangViewModel.getId());
+        ChiTietSPViewModel chiTietSPViewModel = chiTietSPService.findById(idSP);
 
         gioHangChiTietViewModel.setChiTietSP(chiTietSPConvert.mapToEntity(chiTietSPViewModel)); // ChiTietSP
 
         gioHangChiTietViewModel.setGioHang(gioHang); // GioHang
 
         gioHangChiTietViewModel.setSoLuong(soLuong); // SoLuong
-        gioHangChiTietViewModel.setDonGia(chiTietSPService.findByGiaBan(id)); // DonGia
+        gioHangChiTietViewModel.setDonGia(chiTietSPService.findByGiaBan(idSP)); // DonGia
 
-        int soLuongCu = gioHangChiTietRepository.findSoLuongByChiTietSPAndGioHang(id, gioHang.getId());
+        int soLuongCu;
+        try {
+            soLuongCu = gioHangChiTietRepository.findSoLuongByChiTietSPAndGioHang(idSP, gioHang.getId());
+        } catch (AopInvocationException e) {
+            soLuongCu = 0;
+        }
 
-        if (!gioHangChiTietRepository.existsByChiTietSPAndGioHang(id, gioHang.getId())) {
+        if (!gioHangChiTietRepository.existsByChiTietSPAndGioHang(idSP, gioHang.getId())) {
             gioHangChiTietRepository.save(gioHangChiTietConvert.mapToEntity(gioHangChiTietViewModel)); // Save
         } else {
+            gioHangChiTietViewModel.setSoLuong(soLuong + soLuongCu);
             gioHangChiTietRepository.save(gioHangChiTietConvert.mapToEntity(gioHangChiTietViewModel)); // Save
         }
 
-        chiTietSPService.updateProductQuantity(id, soLuong, soLuongCu);
+        chiTietSPService.updateProductQuantity(idSP, soLuong + soLuongCu, soLuongCu);
+    }
+
+    @Override
+    public void update(UUID idSP, int soLuong, KhachHangViewModel khachHangViewModel) {
+
     }
 
     @Transactional
     @Override
     public void delete(UUID idSP, KhachHangViewModel khachHangViewModel) {
-        GioHang gioHang = gioHangRepository.findByKhachHang(khachHangViewModel.getId());
+        GioHang gioHang = gioHangService.findByKhachHang(khachHangViewModel.getId());
+        int soLuongCu;
+        try {
+            soLuongCu = gioHangChiTietRepository.findSoLuongByChiTietSPAndGioHang(idSP, gioHang.getId());
+        } catch (AopInvocationException e) {
+            soLuongCu = 0;
+        }
+        chiTietSPService.updateProductQuantityByDeleteGioHang(idSP, soLuongCu);
         gioHangChiTietRepository.deleteGioHangChiTietByChiTietSPAndGioHang(idSP, gioHang.getId());
     }
 }
