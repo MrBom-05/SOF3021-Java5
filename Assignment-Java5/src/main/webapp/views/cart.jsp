@@ -73,7 +73,7 @@
     </div>
     <div class="row">
         <a type="button" class="col-2 offset-9 btn text-white btn-success float-end"
-           href="/bill-all">
+           href="/bill/addAll">
             Mua hàng
         </a>
     </div>

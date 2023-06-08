@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.models.KhachHangViewModel;
 import com.example.services.HoaDonChiTietService;
+import com.example.services.HoaDonService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.UUID;
 
@@ -17,6 +19,9 @@ import java.util.UUID;
 public class HoaDonController {
     @Autowired
     private HoaDonChiTietService hoaDonChiTietService;
+
+    @Autowired
+    private HoaDonService hoaDonService;
 
     @Autowired
     private HttpSession session;
@@ -43,4 +48,18 @@ public class HoaDonController {
         hoaDonChiTietService.add(id, soLuong, khachHang);
         return "redirect:/bill";
     }
+
+    @GetMapping("addAll")
+    public String addAll() {
+        KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        hoaDonChiTietService.addAll(khachHang);
+        return "redirect:/bill";
+    }
+
+    @GetMapping("update/{id}")
+    public String update(@PathVariable("id") UUID id, @RequestParam("trangThai") int trangThai) {
+        hoaDonService.update(id, trangThai);
+        return "redirect:/bill";
+    }
+
 }

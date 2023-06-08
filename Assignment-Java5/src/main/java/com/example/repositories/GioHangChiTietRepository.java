@@ -28,4 +28,12 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     @Modifying
     @Query("delete from GioHangChiTiet ghct where ghct.chiTietSP.id=:idSP and ghct.gioHang.id=:idGH")
     public void deleteGioHangChiTietByChiTietSPAndGioHang(UUID idSP, UUID idGH);
+
+    @Transactional
+    @Modifying
+    @Query("delete from GioHangChiTiet ghct where ghct.gioHang.id=:id")
+    public void deleteGioHangChiTietByGioHang(@Param("id") UUID id);
+
+    @Query("select ghct from GioHangChiTiet ghct where ghct.gioHang.khachHang.id=:id")
+    public List<GioHangChiTiet> findGioHangChiTietByKhachHang(@Param("id") UUID id);
 }

@@ -1,5 +1,7 @@
 package com.example.services.implement;
 
+import com.example.entities.GioHang;
+import com.example.entities.GioHangChiTiet;
 import com.example.entities.HoaDon;
 import com.example.entities.HoaDonChiTiet;
 import com.example.infrastructure.converter.ChiTietSPConvert;
@@ -11,9 +13,7 @@ import com.example.models.ChiTietSPViewModel;
 import com.example.models.HoaDonChiTietViewModel;
 import com.example.models.KhachHangViewModel;
 import com.example.repositories.HoaDonChiTietRepository;
-import com.example.services.ChiTietSPService;
-import com.example.services.HoaDonChiTietService;
-import com.example.services.HoaDonService;
+import com.example.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +32,12 @@ public class HoaDonChiTietServiceImplement implements HoaDonChiTietService {
     private ChiTietSPService chiTietSPService;
 
     @Autowired
+    private GioHangService gioHangService;
+
+    @Autowired
+    private GioHangChiTietService gioHangChiTietService;
+
+    @Autowired
     private ChiTietSPViewModel chiTietSPViewModel;
 
     @Autowired
@@ -39,9 +45,6 @@ public class HoaDonChiTietServiceImplement implements HoaDonChiTietService {
 
     @Autowired
     private ChiTietSPConvert chiTietSPConvert;
-
-    @Autowired
-    private HoaDonChiTietConvert hoaDonChiTietConvert;
 
     @Override
     public List<HoaDonResponse> findByKhachHang(UUID id) {
@@ -69,6 +72,28 @@ public class HoaDonChiTietServiceImplement implements HoaDonChiTietService {
         hoaDonChiTiet.setDonGia(chiTietSPService.findByGiaBan(idSP));
 
         hoaDonChiTietRepository.save(hoaDonChiTiet);
+
+        gioHangChiTietService.delete(idSP, khachHangViewModel);
+    }
+
+    @Override
+    public void addAll(KhachHangViewModel khachHangViewModel) {
+        HoaDon hoaDon = hoaDonService.save(khachHangViewModel);
+
+        List<GioHangChiTiet> list = gioHangChiTietService.findGioHangChiTietByKhachHang(khachHangViewModel.getId());
+        for (GioHangChiTiet gioHangChiTiet : list) {
+            chiTietSPViewModel.setId(gioHangChiTiet.getChiTietSP().getId());
+
+            hoaDonChiTiet.setChiTietSP(chiTietSPConvert.mapToEntity(chiTietSPViewModel));
+            hoaDonChiTiet.setHoaDon(hoaDon);
+            hoaDonChiTiet.setSoLuong(gioHangChiTiet.getSoLuong());
+            hoaDonChiTiet.setDonGia(gioHangChiTiet.getDonGia());
+
+            hoaDonChiTietRepository.save(hoaDonChiTiet);
+        }
+
+        GioHang gioHang = gioHangService.findByKhachHang(khachHangViewModel.getId());
+        gioHangChiTietService.deleteGioHangChiTietByGioHang(gioHang.getId());
     }
 
 

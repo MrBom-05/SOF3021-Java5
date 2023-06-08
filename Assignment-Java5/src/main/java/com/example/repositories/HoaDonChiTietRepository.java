@@ -25,7 +25,7 @@ public interface HoaDonChiTietRepository<S extends HoaDonChiTiet> extends JpaRep
 
     @Query("select new com.example.infrastructure.response.HoaDonUserResponse" +
             "(hdct.hoaDon.id, hdct.hoaDon.ma, hdct.hoaDon.trangThai, hdct.hoaDon.khachHang.ten, " +
-            "hdct.hoaDon.khachHang.sdt, hdct.hoaDon.khachHang.diaChi, sum(hdct.donGia)) " +
+            "hdct.hoaDon.khachHang.sdt, hdct.hoaDon.khachHang.diaChi, sum(hdct.donGia * hdct.soLuong)) " +
             "from com.example.entities.HoaDonChiTiet hdct left join hdct.hoaDon hd " +
             "where hdct.hoaDon.id=:id group by hdct.hoaDon.id, hdct.hoaDon.ma, " +
             "hdct.hoaDon.ngayTao, hdct.hoaDon.trangThai, hdct.hoaDon.khachHang.ten, " +

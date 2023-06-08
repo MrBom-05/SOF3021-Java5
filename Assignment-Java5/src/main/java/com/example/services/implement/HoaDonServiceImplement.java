@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
-
 @Service
 public class HoaDonServiceImplement implements HoaDonService {
     @Autowired
@@ -47,5 +44,23 @@ public class HoaDonServiceImplement implements HoaDonService {
         HoaDon hoaDon = hoaDonRepository.save(hoaDonConvert.mapToEntity(hoaDonViewModel));
         System.out.println(hoaDon.getId());
         return hoaDon;
+    }
+
+    @Override
+    public HoaDon findHoaDonByKhachHang(UUID id) {
+        return hoaDonRepository.findHoaDonByKhachHang(id);
+    }
+
+    @Override
+    public void update(UUID id, int trangThai) {
+        if (trangThai == 4){
+            hoaDonRepository.updateHuy(id, 4);
+        } else if (trangThai == 3){
+            hoaDonRepository.updateNgayThanhToan(id, 3, getDateNow());
+        } else if (trangThai == 2){
+            hoaDonRepository.updateNgayNhan(id, 2, getDateNow());
+        } else {
+            hoaDonRepository.updateNgayShip(id, 1, getDateNow());
+        }
     }
 }

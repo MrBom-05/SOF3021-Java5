@@ -13,4 +13,5 @@ public interface HoaDonChiTietService {
     public HoaDonUserResponse getByID(UUID id);
     List<HoaDonChiTietResponse> getListByID(UUID id);
     public void add(UUID idSP, int soLuong, KhachHangViewModel khachHangViewModel);
+    public void addAll(KhachHangViewModel khachHangViewModel);
 }

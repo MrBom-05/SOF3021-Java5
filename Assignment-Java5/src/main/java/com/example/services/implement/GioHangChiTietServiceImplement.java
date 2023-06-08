@@ -1,6 +1,7 @@
 package com.example.services.implement;
 
 import com.example.entities.GioHang;
+import com.example.entities.GioHangChiTiet;
 import com.example.infrastructure.converter.ChiTietSPConvert;
 import com.example.infrastructure.converter.GioHangChiTietConvert;
 import com.example.infrastructure.response.GioHangResponse;
@@ -86,5 +87,15 @@ public class GioHangChiTietServiceImplement implements GioHangChiTietService {
         }
         chiTietSPService.updateProductQuantityByDeleteGioHang(idSP, soLuongCu);
         gioHangChiTietRepository.deleteGioHangChiTietByChiTietSPAndGioHang(idSP, gioHang.getId());
+    }
+
+    @Override
+    public void deleteGioHangChiTietByGioHang(UUID id) {
+        gioHangChiTietRepository.deleteGioHangChiTietByGioHang(id);
+    }
+
+    @Override
+    public List<GioHangChiTiet> findGioHangChiTietByKhachHang(UUID id) {
+        return gioHangChiTietRepository.findGioHangChiTietByKhachHang(id);
     }
 }
