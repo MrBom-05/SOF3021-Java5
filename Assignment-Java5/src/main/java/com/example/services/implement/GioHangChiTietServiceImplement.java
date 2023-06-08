@@ -72,7 +72,17 @@ public class GioHangChiTietServiceImplement implements GioHangChiTietService {
 
     @Override
     public void update(UUID idSP, int soLuong, KhachHangViewModel khachHangViewModel) {
+        GioHang gioHang = gioHangService.findByKhachHang(khachHangViewModel.getId());
+        int soLuongCu;
+        try {
+            soLuongCu = gioHangChiTietRepository.findSoLuongByChiTietSPAndGioHang(idSP, gioHang.getId());
+        } catch (AopInvocationException e) {
+            soLuongCu = 0;
+        }
 
+        gioHangChiTietRepository.updateGioHangChiTietByChiTietSPAndGioHang(idSP, gioHang.getId(), soLuong);
+
+        chiTietSPService.updateProductQuantity(idSP, soLuong, soLuongCu);
     }
 
     @Transactional
@@ -97,5 +107,10 @@ public class GioHangChiTietServiceImplement implements GioHangChiTietService {
     @Override
     public List<GioHangChiTiet> findGioHangChiTietByKhachHang(UUID id) {
         return gioHangChiTietRepository.findGioHangChiTietByKhachHang(id);
+    }
+
+    @Override
+    public int index(UUID id) {
+        return gioHangChiTietRepository.index(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.KhachHangViewModel;
+import com.example.services.GioHangChiTietService;
 import com.example.services.HoaDonChiTietService;
 import com.example.services.HoaDonService;
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +22,9 @@ public class HoaDonController {
     private HoaDonChiTietService hoaDonChiTietService;
 
     @Autowired
+    private GioHangChiTietService gioHangChiTietService;
+
+    @Autowired
     private HoaDonService hoaDonService;
 
     @Autowired
@@ -29,6 +33,13 @@ public class HoaDonController {
     @GetMapping("")
     public String index(Model model) {
         KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        if (khachHang != null) {
+            model.addAttribute("index", gioHangChiTietService.index(khachHang.getId()));
+            model.addAttribute("nameUser", "Xin chào " + khachHang.getTen());
+        } else {
+            model.addAttribute("index", 0);
+            model.addAttribute("nameUser", "Đăng nhập");
+        }
         model.addAttribute("list", hoaDonChiTietService.findByKhachHang(khachHang.getId()));
         model.addAttribute("view", "/views/bill.jsp");
         return "home";

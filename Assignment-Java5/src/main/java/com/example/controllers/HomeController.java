@@ -4,6 +4,7 @@ import com.example.infrastructure.request.UserAccountRequest;
 import com.example.infrastructure.response.ChiTietSPResponse;
 import com.example.models.KhachHangViewModel;
 import com.example.services.ChiTietSPService;
+import com.example.services.GioHangChiTietService;
 import com.example.services.KhachHangService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -25,6 +26,10 @@ public class HomeController {
     private ChiTietSPService chiTietSPService;
     @Autowired
     private KhachHangService khachHangService;
+
+    @Autowired
+    private GioHangChiTietService gioHangChiTietService;
+
     @Autowired
     private UserAccountRequest userAccountRequest;
     @Autowired
@@ -32,6 +37,14 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model, @RequestParam(defaultValue = "0" ,name = "page") int page) {
+        KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        if (khachHang != null) {
+            model.addAttribute("index", gioHangChiTietService.index(khachHang.getId()));
+            model.addAttribute("nameUser", "Xin chào " + khachHang.getTen());
+        } else {
+            model.addAttribute("index", 0);
+            model.addAttribute("nameUser", "Đăng nhập");
+        }
         Pageable pageable = PageRequest.of(page, 4);
         Page<ChiTietSPResponse> chiTietSPPage = chiTietSPService.findAllHomeByChiTietSP(pageable);
         model.addAttribute("list", chiTietSPPage);
@@ -42,6 +55,14 @@ public class HomeController {
 
     @GetMapping("product-detail/{id}")
     public String productDetail(Model model, @PathVariable("id") UUID id) {
+        KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        if (khachHang != null) {
+            model.addAttribute("index", gioHangChiTietService.index(khachHang.getId()));
+            model.addAttribute("nameUser", "Xin chào " + khachHang.getTen());
+        } else {
+            model.addAttribute("index", 0);
+            model.addAttribute("nameUser", "Đăng nhập");
+        }
         model.addAttribute("chiTietSP", chiTietSPService.findBySanPhamResponse(id));
         model.addAttribute("view", "/views/product-detail.jsp");
         return "home";

@@ -21,6 +21,13 @@ public class GioHangController {
     @GetMapping("")
     public String index(Model model) {
         KhachHangViewModel khachHang = (KhachHangViewModel) session.getAttribute("khachHang");
+        if (khachHang != null) {
+            model.addAttribute("index", gioHangChiTietService.index(khachHang.getId()));
+            model.addAttribute("nameUser", "Xin chào " + khachHang.getTen());
+        } else {
+            model.addAttribute("index", 0);
+            model.addAttribute("nameUser", "Đăng nhập");
+        }
         model.addAttribute("list", gioHangChiTietService.findGioHangByKhachHang(khachHang.getId()));
         model.addAttribute("view", "/views/cart.jsp");
         return "home";

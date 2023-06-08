@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Repository
 public interface ChiTietSPRepository extends JpaRepository<ChiTietSP, UUID> {
-    @Query("select new com.example.infrastructure.response.ChiTietSPResponse(ctsp.sanPham, ctsp.giaBan) from ChiTietSP ctsp")
+    @Query("select new com.example.infrastructure.response.ChiTietSPResponse(ctsp.sanPham, ctsp.giaBan) from ChiTietSP ctsp WHERE ctsp.soLuongTon > 0")
     public Page<ChiTietSPResponse> findAllHomeByChiTietSP(Pageable pageable);
 
     @Query("select new com.example.infrastructure.response.SanPhamResponse(ctsp.sanPham, ctsp.id, ctsp.soLuongTon, ctsp.giaBan) from ChiTietSP ctsp where ctsp.sanPham.id = ?1")

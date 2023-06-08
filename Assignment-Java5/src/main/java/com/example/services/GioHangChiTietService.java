@@ -14,4 +14,5 @@ public interface GioHangChiTietService {
     public void delete(UUID idSP, KhachHangViewModel khachHangViewModel);
     public void deleteGioHangChiTietByGioHang(UUID id);
     public List<GioHangChiTiet> findGioHangChiTietByKhachHang(UUID id);
+    public int index(UUID id);
 }

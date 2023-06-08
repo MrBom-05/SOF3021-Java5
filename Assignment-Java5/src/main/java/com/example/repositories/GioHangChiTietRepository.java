@@ -36,4 +36,12 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
 
     @Query("select ghct from GioHangChiTiet ghct where ghct.gioHang.khachHang.id=:id")
     public List<GioHangChiTiet> findGioHangChiTietByKhachHang(@Param("id") UUID id);
+
+    @Query("select count(ghct) from GioHangChiTiet ghct where ghct.gioHang.khachHang.id=:id")
+    public int index(@Param("id") UUID id);
+
+    @Transactional
+    @Modifying
+    @Query("update GioHangChiTiet ghct set ghct.soLuong=:soLuong where ghct.chiTietSP.id=:idSP and ghct.gioHang.id=:idGH")
+    public void updateGioHangChiTietByChiTietSPAndGioHang(@Param("idSP") UUID idSP, @Param("idGH") UUID idGH, @Param("soLuong") int soLuong);
 }
