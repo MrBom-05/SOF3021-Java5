@@ -3,8 +3,10 @@ package com.example.controllers.admin;
 import com.example.models.NSXViewModel;
 import com.example.services.NSXService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +23,14 @@ public class NSXController {
     @Autowired
     private NSXViewModel nsxViewModel;
 
+    @Autowired
+    private HttpSession session;
+
     private static final String redirect = "redirect:/admin/nsx/index";
 
     @GetMapping("index")
     public String index(Model model) {
+        session.setAttribute("thongBao", "");
         model.addAttribute("list", nsxService.findAll());
         model.addAttribute("view", "/views/admin/nsx/index.jsp");
         return "admin/layout";
@@ -50,7 +56,12 @@ public class NSXController {
 
     @GetMapping("delete/{id}")
     public String deleteGet(Model model, @PathVariable("id") UUID id) {
-        nsxService.deleteById(id);
+        try {
+            nsxService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redirect;
     }
 
@@ -62,6 +73,7 @@ public class NSXController {
             model.addAttribute("view", "/views/admin/nsx/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Add success");
             nsxService.saveOrUpdate(nsxViewModel);
             return redirect;
         }
@@ -75,6 +87,7 @@ public class NSXController {
             model.addAttribute("view", "/views/admin/nsx/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Update success");
             nsxViewModel.setId(id);
             nsxService.saveOrUpdate(nsxViewModel);
             return redirect;

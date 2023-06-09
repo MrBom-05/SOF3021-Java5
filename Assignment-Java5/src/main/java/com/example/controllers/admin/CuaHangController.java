@@ -3,8 +3,10 @@ package com.example.controllers.admin;
 import com.example.models.CuaHangViewModel;
 import com.example.services.CuaHangService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +22,14 @@ public class CuaHangController {
     @Autowired
     private CuaHangViewModel cuaHangViewModel;
 
+    @Autowired
+    private HttpSession session;
+
     private static final String redirect = "redirect:/admin/cua-hang/index";
 
     @GetMapping("index")
     public String index(Model model) {
+        session.setAttribute("thongBao", "");
         model.addAttribute("list", cuaHangService.findAll());
         model.addAttribute("view", "/views/admin/cua-hang/index.jsp");
         return "admin/layout";
@@ -49,7 +55,12 @@ public class CuaHangController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        cuaHangService.deleteById(id);
+        try {
+            cuaHangService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redirect;
     }
 
@@ -61,6 +72,7 @@ public class CuaHangController {
             model.addAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Add success");
             cuaHangService.saveOrUpdate(cuaHang);
             return redirect;
         }
@@ -74,6 +86,7 @@ public class CuaHangController {
             model.addAttribute("view", "/views/admin/cua-hang/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Upadte success");
             cuaHang.setId(id);
             cuaHangService.saveOrUpdate(cuaHang);
             return redirect;

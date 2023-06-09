@@ -21,31 +21,14 @@
     </ul>
 </div>
 <div class="col-10">
+    <div class="alert text-center mt-3">
+        <p>${thongBao}</p>
+    </div>
     <jsp:include page="${ view }"/>
 </div>
-<div id="myModal" class="modal" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông báo</h5>
-            </div>
-            <div class="modal-body">
-                <p id="modalMessage"></p>
-            </div>
-        </div>
-    </div>
-</div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var message = "${thongBao}";
-        console.log(message);
-        if (message !== null && message !== "" && message !== undefined) {
-            $("#message").text(message);
-            $("#myModal").modal("show");
-        }
-    });
-</script>
+
 </body>
 </html>

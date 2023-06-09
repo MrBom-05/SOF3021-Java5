@@ -3,8 +3,10 @@ package com.example.controllers.admin;
 import com.example.models.ChiTietSPViewModel;
 import com.example.services.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,11 +37,15 @@ public class ChiTietSPController {
     @Autowired
     private ChiTietSPViewModel chiTietSPViewModel;
 
+    @Autowired
+    private HttpSession session;
+
 
     private static final String redirect = "redirect:/admin/chi-tiet-sp/index";
 
     @GetMapping("index")
     public String index(Model model) {
+        session.setAttribute("thongBao", "");
         model.addAttribute("list", chiTietSPService.findAll());
         model.addAttribute("view", "/views/admin/chi-tiet-sp/index.jsp");
         return "admin/layout";
@@ -73,7 +79,12 @@ public class ChiTietSPController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        chiTietSPService.deleteById(id);
+        try {
+            chiTietSPService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redirect;
     }
 
@@ -89,6 +100,7 @@ public class ChiTietSPController {
             model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Add success");
             chiTietSPService.saveOrUpdate(chiTietSPViewModel);
             return redirect;
         }
@@ -102,6 +114,7 @@ public class ChiTietSPController {
             model.addAttribute("view", "/views/admin/chi-tiet-sp/create.jsp");
             return "admin/layout";
         } else {
+            session.setAttribute("thongBao", "Update success");
             chiTietSPService.saveOrUpdate(chiTietSPViewModel);
             return redirect;
         }

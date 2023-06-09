@@ -3,8 +3,10 @@ package com.example.controllers.admin;
 import com.example.infrastructure.request.SanPhamRequest;
 import com.example.models.SanPhamViewModel;
 import com.example.services.SanPhamService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,9 @@ public class SanPhamController {
 
     @Autowired
     private SanPhamViewModel sanPhamViewModel;
+
+    @Autowired
+    private HttpSession session;
 
     private static final String redidect = "redirect:/admin/san-pham/index";
 
@@ -52,7 +57,12 @@ public class SanPhamController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        sanPhamService.deleteById(id);
+        try {
+            sanPhamService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redidect;
     }
 

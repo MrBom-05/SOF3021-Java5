@@ -3,8 +3,10 @@ package com.example.controllers.admin;
 import com.example.models.MauSacViewModel;
 import com.example.services.MauSacService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,9 @@ public class MauSacController {
 
     @Autowired
     private MauSacViewModel mauSacViewModel;
+
+    @Autowired
+    private HttpSession session;
 
     private static final String redirect = "redirect:/admin/mau-sac/index";
 
@@ -50,7 +55,12 @@ public class MauSacController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        mauSacService.deleteById(id);
+        try {
+            mauSacService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redirect;
     }
 

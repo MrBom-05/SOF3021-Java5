@@ -5,8 +5,10 @@ import com.example.services.ChucVuService;
 import com.example.services.CuaHangService;
 import com.example.services.NhanVienService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +30,9 @@ public class NhanVienController {
 
     @Autowired
     private NhanVienViewModel nhanVienViewModel;
+
+    @Autowired
+    private HttpSession session;
 
     private static final String redirect = "redirect:/admin/nhan-vien/index";
 
@@ -64,7 +69,12 @@ public class NhanVienController {
 
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
-        nhanVienService.deleteById(id);
+        try {
+            nhanVienService.deleteById(id);
+
+        } catch (DataIntegrityViolationException e) {
+            session.setAttribute("thongBao", "Không thể xóa sản phẩm do có bản ghi liên quan");
+        }
         return redirect;
     }
 
