@@ -1,17 +1,16 @@
 package com.example.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Nationalized;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -28,26 +27,23 @@ public class PhieuGiamGia {
     @Size(max = 20, message = "Tên phiếu không được quá 20 ký tự")
     @Nationalized
     @Column(name = "TenPhieu", length = 20)
+    @NotBlank(message = "Tên phiếu không được để trống")
     private String tenPhieu;
 
     @Column(name = "NgayBatDau")
+    @NotNull(message = "Ngày bắt đầu không được để trống")
     private Date ngayBatDau;
 
     @Column(name = "NgayKetThuc")
+    @NotNull(message = "Ngày kết thúc không được để trống")
     private Date ngayKetThuc;
 
-    @AssertTrue(message = "Ngày kết thúc phải nhỏ hơn ngày bắt đầu.")
-    private boolean isValidDateRange() {
-        if (ngayBatDau == null || ngayKetThuc == null) {
-            return true;
-        }
-        return ngayBatDau.before(ngayKetThuc);
-    }
-
     @Column(name = "GiaTriGiam")
+    @NotNull(message = "Giá trị giảm không được để trống")
     private BigDecimal giaTriGiam;
 
     @Column(name = "GiaTriGiamToiDa")
+    @NotNull(message = "Giá trị giảm tối đa không được để trống")
     private BigDecimal giaTriGiamToiDa;
 
     @Column(name = "HinhThucGiam")
@@ -58,6 +54,7 @@ public class PhieuGiamGia {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "NguoiSoHuu")
+    @NotNull(message = "Người sở hữu không được để trống")
     private KhachHang nguoiSoHuu;
 
 }
